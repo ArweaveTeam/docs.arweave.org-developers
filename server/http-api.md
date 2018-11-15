@@ -2,13 +2,11 @@
 
 ## Introduction
 
-## 
+The Arweave procol is based on HTTP, so any existing http clients/libraries can be used to interface with the network. The default port is **1984**.
 
-#### Postman Collection
+Requests and queries can be sent to any Arweave node directly using their IP address, for example [http://159.65.213.43:1984/info](http://159.65.213.43:1984/info). Hostnames can also be used if configured with DNS, for example [http://arweave.net:1984/info](http://arweave.net:1984/info).
 
-[![](../.gitbook/assets/68747470733a2f2f72756e2e7073746d6e2e696f2f627574746f6e2e737667.svg) ](https://app.getpostman.com/run-collection/8af0090f2db84e979b69)
-
-#### Sample requests
+#### Sample Request
 
 {% tabs %}
 {% tab title="cURL" %}
@@ -82,6 +80,8 @@ if ($err) {
 {% endtab %}
 {% endtabs %}
 
+
+
 ## Schema
 
 Common data structures, formats, and processes explained.
@@ -90,19 +90,45 @@ Common data structures, formats, and processes explained.
 
 ### Transaction Format
 
-There are three types of transactions you can send, depending on your use case different combinations of the `data`, `target`, and `quantity` fields should be used. See the [Field Definitions](http-api.md#field-definitions) for more.
+There are three types of transactions you can send depending on your [use case](http-api.md#transaction-use-cases), as different combinations of the `data`, `target`, and `quantity` fields can be used.
+
+All transaction fields are strings with the exception of tags, which is an array of objects containing key/value pairs, this includes  the `quantity` and `reward` fields as they are represented by [winston strings.](http-api.md#ar-and-winston)
+
+See the [sample transactions](http-api.md#sample-transactions) below for full examples.
+
+
+
+#### Field Definitions
+
+| Name | Required | Value |
+| :--- | :--- | :--- |
+| id | Yes | The transaction ID is derrived from the Base64 URL encoding of a SHA-256 hash of the Base64 decoded [transaction signature](http-api.md#transaction-signing). |
+| last\_tx | Yes | The last outgoing transaction ID from the sending wallet. Use the value returned from . If this is the first transaction from the wallet then an empty string should be used. |
+| owner | Yes | The full RSA modulus value of the sending wallet, Base64 URL encoded. The modulus is the `n` value from the JWK. |
+| tags | No | If no tags are being used then use an empty array. |
+| target | No | The target address when sending AR, the amount to transfer should be specified in the quantity field. If no AR is being transferred to another wallet then use an empty string. |
+| quantity | No | The amount to transfer from the owner wallet to the target wallet address as a [winston string](http-api.md#ar-and-winston). If no AR is being transferred then use an empty string. |
+| data | No | The data to be submitted as a Base64 URL encoded string. If no data is being submitted then use an empty string. |
+| reward | Yes | The transaction fee as a [winston string](http-api.md#ar-and-winston), this should be calculated using the fee endpoint. |
+| signature | Yes | The transaction signature is derrived from concatenating the transaction data then signing it, the signature should then be Base64 URL encoded. See [Transaction Signing](http-api.md#transaction-signing) for more. |
+
+
+
+#### **Transaction Use Cases**
 
 **1. Data Transaction**
 
-This is the most common transaction format used to store a piece data on the network. The data should should be base64 URL encoded and go in the `data` field. The `target` and `quantity` fields should be set to empty strings.
+This is the most common transaction format used to store a piece data on the network. The data should should be base64 URL encoded and go in the `data` field. The `target` and `quantity` fields should be set to empty strings as they are not needed.
 
 **2. Wallet to Wallet AR Transfer**
 
-This type of transaction is used to move AR from one wallet to another. The `data` field should be set to an empty string.
+This type of transaction is used to move AR from one wallet to another. The `data` field should be set to an empty string as it it not needed.
 
 **3. Wallet to Wallet AR transfer with Data**
 
-This type of transaction is for transferring AR with a piece of data attached, this is useful for attaching a message or some other piece of data to a transaction, for example a reference number or identifier to help account for the transaction. The `data`, `target`, and `quantity` fields should all be used for this type of tranasaction.
+This type of transaction is for transferring AR with a piece of data attached, this is useful for attaching a message or some other piece of data to a transaction sent to another wallet, for example a reference number or identifier to help account for the transaction. The `data`, `target`, and `quantity` fields should all be used for this type of tranasaction.
+
+
 
 #### Sample Transactions
 
@@ -122,7 +148,7 @@ This type of transaction is for transferring AR with a piece of data attached, t
 }
 ```
 
-Some long values have been abbreviated, the full transaction can be found here: [**http://arweave.net/BNttzDav3jHVnNiV7nYbQv-GY0HQ-4XXsdkE5K9ylHQ**](http://arweave.net/BNttzDav3jHVnNiV7nYbQv-GY0HQ-4XXsdkE5K9ylHQ)\*\*\*\*
+Some long values have been abbreviated, the full transaction can be found here: [**http://arweave.net/tx/BNttzDav3jHVnNiV7nYbQv-GY0HQ-4XXsdkE5K9ylHQ**](http://arweave.net/tx/BNttzDav3jHVnNiV7nYbQv-GY0HQ-4XXsdkE5K9ylHQ)\*\*\*\*
 {% endtab %}
 
 {% tab title="Wallet to Wallet AR Transfer" %}
@@ -140,7 +166,7 @@ Some long values have been abbreviated, the full transaction can be found here: 
 }
 ```
 
-Some long values have been abbreviated, the full transaction can be found here: [**http://arweave.net/UEVFNJVXSu7GodYbZoldRHGi\_tjzNtNcYjeSkxKCpiE**](http://arweave.net/UEVFNJVXSu7GodYbZoldRHGi_tjzNtNcYjeSkxKCpiE)\*\*\*\*
+Some long values have been abbreviated, the full transaction can be found here: [**http://arweave.net/tx/UEVFNJVXSu7GodYbZoldRHGi\_tjzNtNcYjeSkxKCpiE**](http://arweave.net/tx/UEVFNJVXSu7GodYbZoldRHGi_tjzNtNcYjeSkxKCpiE)\*\*\*\*
 {% endtab %}
 
 {% tab title="Wallet to Wallet AR Transfer with Data" %}
@@ -158,65 +184,63 @@ Some long values have been abbreviated, the full transaction can be found here: 
 }
 ```
 
-Some long values have been abbreviated, the full transaction can be found here: [**http://arweave.net/3pXpj43Tk8QzDAoERjHE3ED7oEKLKephjnVakvkiHF8**](http://arweave.net/3pXpj43Tk8QzDAoERjHE3ED7oEKLKephjnVakvkiHF8)\*\*\*\*
+Some long values have been abbreviated, the full transaction can be found here: [**http://arweave.net/tx/3pXpj43Tk8QzDAoERjHE3ED7oEKLKephjnVakvkiHF8**](http://arweave.net/tx/3pXpj43Tk8QzDAoERjHE3ED7oEKLKephjnVakvkiHF8)\*\*\*\*
 {% endtab %}
 {% endtabs %}
 
-#### Field Definitions
 
-| Field Name | Value |
-| :--- | :--- |
-| id | The transaction ID is derrived from Base64 URL encoding a SHA-256 hash of the [transaction signature](http-api.md#transaction-signing). |
-| last\_tx | The last outgoing transaction ID from the sending wallet. Use the value returned from . If this is the first transaction from the wallet then an empty string should be used. |
-| owner | The full RSA modulus value of the sending wallet, Base64 URL encoded. The modulus is the `n` value from the JWK. |
-| tags |  |
-| target |  |
-| quantity |  |
-| data |  |
-| reward |  |
-| signature |  |
-
-{% hint style="info" %}
-[https://en.wikipedia.org/wiki/Base64\#URL\_applications](https://en.wikipedia.org/wiki/Base64#URL_applications)
-{% endhint %}
 
 ### Transaction Signing
 
-Transaction signatures are generated by concatenating the raw and unencoded values from the following fields: owner, target, data, quantity, reward and last\_tx, then signing the raw data.
+Transaction signatures are generated by concatenating the raw and unencoded values from the following fields: **owner, target, data, quantity, reward, last\_tx**, then signing the raw data.
 
-{% hint style="warning" %}
-Field values **must** be concatenated in the specified order to produce valid signatures.
-{% endhint %}
+Signatures are **RSA-PSS** with **SHA-256** as the hashing function.
+
+#### Transaction Signing Examples
 
 {% tabs %}
 {% tab title="JavaScript" %}
 ```javascript
-let key = await crypto.subtle.importKey(
-    'jwk',
-    jwk,
-    {
-        name: 'RSA-PSS',
-        modulusLength: 4096,
-        publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
-        hash: {
-            name: 'SHA-256',
-        }
-    },
-    false,
-    ['sign']
-);
-        
-let signature = await crypto.subtle.sign(
-    {
-        hash: 'SHA-256',
-        subtle: {
+function sign(jwk, {owner, target, data, quantity, reward, last_tx}){
+
+    let buffers = [
+        this.utils.b64ToBuffer(this.utils.b64urldec(owner)),
+        this.utils.b64ToBuffer(this.utils.b64urldec(target)),
+        this.utils.b64ToBuffer(this.utils.b64urldec(data)),
+        this.utils.stringToBuffer(quantity),
+        this.utils.stringToBuffer(reward),
+        this.utils.b64ToBuffer(this.utils.b64urldec(last_tx)),
+    ];
+
+    let key = await crypto.subtle.importKey(
+        'jwk',
+        jwk,
+        {
             name: 'RSA-PSS',
-            saltLength: 0,
-        }
-    },
-    key,
-    buffer
-);
+            modulusLength: 4096,
+            publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+            hash: {
+                name: 'SHA-256',
+            }
+        },
+        false,
+        ['sign']
+    );
+
+    let signature = await crypto.subtle.sign(
+        {
+            hash: 'SHA-256',
+            subtle: {
+                name: 'RSA-PSS',
+                saltLength: 0,
+            }
+        },
+        key,
+        buffers
+    );
+    
+    return signature;
+}
 ```
 {% endtab %}
 {% endtabs %}
@@ -227,9 +251,7 @@ Arweave uses the JSON Web Key \(JWK\) format \([RFC 7517](https://tools.ietf.org
 
 It's widely supported with libraries for most popular languages. It's possible to convert a JWK to a PEM file or other crypto key file format, support for this this will vary from language to language.
 
-{% hint style="warning" %}
-If you're generating your own keys and not ones generated by the nodes **the public exponent \(e\) must be 65537.** If any other value is used then transactions signed by these keys will be invalid and rejected.
-{% endhint %}
+If you're generating your own keys manually **the public exponent \(e\) must be 65537**. If any other value is used then transactions signed by these keys will be invalid and rejected.
 
 #### Sample JWK
 
@@ -247,19 +269,15 @@ If you're generating your own keys and not ones generated by the nodes **the pub
 }
 ```
 
-{% hint style="danger" %}
-The d
-{% endhint %}
 
-### Winston and AR
 
-Winston is the smallest unit of AR, similar to a satoshi in Bitcoin, or wei in Etherium.
+### AR and Winston
 
-{% hint style="info" %}
-1 AR = 1000000000000 Winston \(12 zeros\)
-{% endhint %}
+Winston is the smallest possible unit of AR, similar to a [satoshi](https://en.bitcoin.it/wiki/Satoshi_%28unit%29) in Bitcoin, or [wei](http://ethdocs.org/en/latest/ether.html#denominations) in Etherium.
 
-**The API will return all AR values as winston strings**, this is to allow for interoperability between environments that do not accommodate arbitrary-precision arithmetic.
+**1 AR** = 1000000000000 Winston \(12 zeros\) and **1 Winston** = 0.0000000000001 AR.
+
+The HTTP API will return all amounts as winston strings, this is to allow for easy interoperability between environments that do not accommodate arbitrary-precision arithmetic.
 
 JavaScript for example stores all numbers as double precision floating point values and as such cannot natively express the integer number of winston. Providing these values as strings allows them to be directly loaded into most 'bignum' libraries.
 
@@ -308,7 +326,7 @@ Read about here
 
 {% api-method-response-example httpCode=202 %}
 {% api-method-response-example-description %}
-The transaction is pending.
+The transaction ID is known but is still pending, it has not been mined into a block yet.
 {% endapi-method-response-example-description %}
 
 ```
@@ -339,7 +357,7 @@ Not Found.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-**Try it out:** [**http://arweave.net:1984/tx/BNttzDav3jHVnNiV7nYbQv-GY0HQ-4XXsdkE5K9ylHQ**](http://arweave.net:1984/tx/BNttzDav3jHVnNiV7nYbQv-GY0HQ-4XXsdkE5K9ylHQ)\*\*\*\*
+\*\*\*\*[**http://arweave.net:1984/tx/BNttzDav3jHVnNiV7nYbQv-GY0HQ-4XXsdkE5K9ylHQ**](http://arweave.net:1984/tx/BNttzDav3jHVnNiV7nYbQv-GY0HQ-4XXsdkE5K9ylHQ)\*\*\*\*
 
 {% hint style="info" %}
 The **quantity** and **reward** values are always represented as winston strings. [**Why?**](http-api.md#winston-and-ar)\*\*\*\*
