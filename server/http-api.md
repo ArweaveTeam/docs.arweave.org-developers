@@ -1,10 +1,14 @@
+---
+description: An overview of the Arweave HTTP API.
+---
+
 # HTTP API
 
 ## Introduction
 
 The Arweave protocol is based on HTTP, so any existing http clients/libraries can be used to interface with the network, for example [Axios](https://github.com/axios/axios) or [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for JavaScript, [Guzzle](https://github.com/guzzle/guzzle) for PHP, etc.
 
-Arweave specific wrappers and clients are currently in development to simplify 
+Arweave specific wrappers and clients are currently in development to simplify common operations and API interactions.
 
 The default port is **1984**.
 
@@ -22,28 +26,10 @@ curl --request GET \
 ```
 {% endtab %}
 
-{% tab title="Javascript \(Axios\)" %}
-```javascript
-const axios = require('axios');
-
-let api = axios.create({
-    baseURL: 'http://arweave.net:1984'
-});
-
-api.get('info')
-.then( response => {
-  console.log('Arweave network height is: ' + response.data.height);
-})
-.catch( error => {
-  console.error(error);
-});
-```
-{% endtab %}
-
 {% tab title="JavaScript \(Fetch\)" %}
 ```javascript
 fetch('http://arweave.net:1984/info')
-.then( response => ) {
+.then( response => {
   console.log('Arweave network height is: ' + response.json().height);
 })
 .catch( error => {
@@ -70,45 +56,98 @@ request(options, function (error, response, body) {
 
 ```
 {% endtab %}
-
-{% tab title="PHP" %}
-```php
-<?php
-
-$curl = curl_init();
-
-curl_setopt_array($curl, array(
-  CURLOPT_PORT => "1984",
-  CURLOPT_URL => "http://arweave.net:1984/info",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-));
-
-$response = curl_exec($curl);
-$err = curl_error($curl);
-
-curl_close($curl);
-
-if ($err) {
-  echo "cURL Error #:" . $err;
-} else {
-  echo $response;
-}
-```
-{% endtab %}
 {% endtabs %}
 
-{% embed url="https://runkit.com/5beeb7cd1dfbbb001237207b/5beeb7cf29b0f30012b775d2" %}
+
 
 ## Schema
 
 Common data structures, formats, and processes explained.
 
 ## 
+
+### Block Format
+
+There are currently two block formats a node may return depending on how you request the block.
+
+The initial V1 format has the full block hash list and wallet list embedded directly in the block JSON structure, this has since been removed, these can now be requested using the hash list endpoint and wallet lists endpoint.
+
+{% hint style="danger" %}
+**The V1 block format has been deprecated and will be removed in future releases.**
+{% endhint %}
+
+{% tabs %}
+{% tab title="V2" %}
+```javascript
+{
+    "nonce": "AAEBAAABAQAAAQAAAQEBAAEAAAABAQABAQABAAEAAAEBAAAAAQAAAAAAAQAAAQEBAAEBAAEBAQEBAQEAAQEBAAABAQEAAQAAAQABAAABAAAAAAEBAQEBAAABAQEAAAAAAAABAQAAAQAAAQEAAQABAQABAQEAAAABAAABAQABAQEAAAEBAQABAQEBAQEBAAABAQEAAAABAQABAAABAAEAAQEBAQAAAAABAQABAQAAAAAAAAABAQABAAEBAAEAAQABAQABAAEBAQEBAAEAAQABAAABAQEBAQAAAQABAQEBAAEBAQAAAQEBAQABAAEBAQEBAAAAAAABAAEAAAEAAAEAAAEBAAAAAAEAAQABAAAAAAABAQABAQAAAAEBAQAAAAABAAABAAEBAQEAAAAAAQAAAQABAQABAAEAAQABAQAAAAEBAQAAAQAAAAEBAAEBAAEBAQEAAAEBAQAAAQAAAAABAAEAAQEAAQ",
+    "previous_block": "V6YjG8G3he0JIIwRtzTccX39rS0jH-jOqUJy6rxrVAHY0RT0AVhG8K22wCDxy1A0",
+    "timestamp": 1528500720,
+    "last_retarget": 1528500720,
+    "diff": 31,
+    "height": 100,
+    "hash": "AAAAANsEvzGbICpfAj3NN41_ox--2cNxkEhAo0aggpDPkY7zru29g24uMWUP9hTa",
+    "indep_hash": "ngFDAB2KRhJgJRysuhpp1u65FjBf5WZk99_NyoMx8w6uP0IVjzb93EVkYxmcErdZ",
+    "txs": [
+        "7BoxcxiJIjTwUp3JXp0xRJQXf6hZtyJj1kjGNiEl5A8"
+    ],
+    "wallet_list": "ph2FDDuQjNbca34tz7vP9X5Xve2EGJi2ZgFqhMITAdw",
+    "reward_addr": "em8MfGRInwWEAQnE6b50ENaFOf-0to4Pbygng1ilWGQ",
+    "tags": [],
+    "reward_pool": 60770606104,
+    "weave_size": 599058,
+    "block_size": 0
+}
+```
+{% endtab %}
+
+{% tab title="V1" %}
+```javascript
+{
+    "hash_list": [
+        "V6YjG8G3he0JIIwRtzTccX39rS0jH-jOqUJy6rxrVAHY0RT0AVhG8K22wCDxy1A0",
+        "uf9gQ7SdNv8mPwdUxohZZvywBkNCXBN8bgk-eclb6La-Ji8GW0LLB_f4jzWGeiZs",
+        "GrJ4k5rv6yEehkiW5LaXrvwWVsyhQB7O-sylCsXqGk05WBcGJNFY5OhuvviXijYy",
+        "0EXA2tzu4C960IxJegJ0r6na5NOlIwbtVhtYxKmdbyZ9R2ohl_OKJ5t5KnFrH4H7",
+        "8ReYNVyf2_gEaQsur8dnI145c73MmcNygJ9EqgfbJNaUSO9DESi5LDPbxoCOv555"
+    ],
+    "nonce": "AAEBAAABAQAAAQAAAQEBAAEAAAABAQABAQABAAEAAAEBAAAAAQAAAAAAAQAAAQEBAAEBAAEBAQEBAQEAAQEBAAABAQEAAQAAAQABAAABAAAAAAEBAQEBAAABAQEAAAAAAAABAQAAAQAAAQEAAQABAQABAQEAAAABAAABAQABAQEAAAEBAQABAQEBAQEBAAABAQEAAAABAQABAAABAAEAAQEBAQAAAAABAQABAQAAAAAAAAABAQABAAEBAAEAAQABAQABAAEBAQEBAAEAAQABAAABAQEBAQAAAQABAQEBAAEBAQAAAQEBAQABAAEBAQEBAAAAAAABAAEAAAEAAAEAAAEBAAAAAAEAAQABAAAAAAABAQABAQAAAAEBAQAAAAABAAABAAEBAQEAAAAAAQAAAQABAQABAAEAAQABAQAAAAEBAQAAAQAAAAEBAAEBAAEBAQEAAAEBAQAAAQAAAAABAAEAAQEAAQ",
+    "previous_block": "V6YjG8G3he0JIIwRtzTccX39rS0jH-jOqUJy6rxrVAHY0RT0AVhG8K22wCDxy1A0",
+    "timestamp": 1528500720,
+    "last_retarget": 1528500720,
+    "diff": 31,
+    "height": 100,
+    "hash": "AAAAANsEvzGbICpfAj3NN41_ox--2cNxkEhAo0aggpDPkY7zru29g24uMWUP9hTa",
+    "indep_hash": "ngFDAB2KRhJgJRysuhpp1u65FjBf5WZk99_NyoMx8w6uP0IVjzb93EVkYxmcErdZ",
+    "txs": [
+        "7BoxcxiJIjTwUp3JXp0xRJQXf6hZtyJj1kjGNiEl5A8"
+    ],
+    "wallet_list": [
+        {
+            "wallet": "ABPXQ3UzGLenVZ1Vq77G27ZETEgxIBDjvwtxt0J7Hy4",
+            "quantity": 100000000000000000,
+            "last_tx": ""
+        },
+        {
+            "wallet": "AC_xfhPRl-jsJEwo0x_q7Lj0LDvMA8QP0YH4PKKUyv0",
+            "quantity": 100000000000000000,
+            "last_tx": ""
+        },
+        {
+            "wallet": "_wtKD-bvlOP-qzmjtQWAn-zWB8ufJmGko9lBu6XllAg",
+            "quantity": 100000000000000000,
+            "last_tx": ""
+        }
+    ],
+    "reward_addr": "em8MfGRInwWEAQnE6b50ENaFOf-0to4Pbygng1ilWGQ",
+    "tags": [],
+    "reward_pool": 60770606104,
+    "weave_size": 599058,
+    "block_size": 0
+}
+```
+{% endtab %}
+{% endtabs %}
 
 ### Transaction Format
 
@@ -457,11 +496,11 @@ Not Found.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-See full examples in the [transaction format section](http-api.md#transaction-format).
-
-{% hint style="info" %}
+{% hint style="warning" %}
 The **quantity** and **reward** values are always represented as winston strings. [**What and why?**](http-api.md#winston-and-ar)\*\*\*\*
 {% endhint %}
+
+See the [Transaction Format](http-api.md#transaction-format) section for details about transaction structure and contents, with examples.
 
 {% api-method method="get" host="http://arweave.net:1984" path="/tx/{id}/{field}" %}
 {% api-method-summary %}
@@ -882,6 +921,86 @@ Invalid address.
 {% endapi-method-spec %}
 {% endapi-method %}
 
+## Blocks
+
+Endpoints for getting blocks and block data.
+
+{% api-method method="get" host="http://arweave.net:1984" path="block/hash/{block\_hash}" %}
+{% api-method-summary %}
+Get Block by ID
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Get a block by its hash \(idep\_hash\).  
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="block\_hash" type="string" required=false %}
+The block hash \(indep\_hash\).
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Accept" type="string" required=false %}
+application/json
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="X-Block-Format" type="string" required=false %}
+2
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+A successful block response using the V2 format.
+{% endapi-method-response-example-description %}
+
+```javascript
+{
+    "nonce": "AQEBAAEBAQAAAAAAAQABAAABAAEAAAEBAAAAAQEBAQAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "previous_block": "5M2ADEdNw0m5FnF62eBfFJ82lrizaAbb-gI6h3SNCOcV8JP5S7QQzy7_qf9ZxJsQ",
+    "timestamp": 1541689556,
+    "last_retarget": 1541688945,
+    "diff": 34,
+    "height": 78419,
+    "hash": "AAAAABXiIEay0l1jH9ibJWKNvCUlxVQrQiZGVyW-4MuDX6Pn_uq6-oOGk3kwAxRa",
+    "indep_hash": "fv5jRd2TDURBIJAS0BJCtqY3eXpoXvLu7XE6zFU2sgiKFDZc3D6qChS5V99SRuH0",
+    "txs": [],
+    "wallet_list": "XYkvWyf0HG2OE1c1_61S6JYew13cKafmshIQ5MGmcAk",
+    "reward_addr": "G5m6plnC8pKBQFDZOjZvCscbGL216zE_bCexAzM-7UI",
+    "tags": [],
+    "reward_pool": 3232,
+    "weave_size": 160604943,
+    "block_size": 0
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+Error response if block hash is not valid or not available.
+{% endapi-method-response-example-description %}
+
+```
+Block not found.
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% hint style="danger" %}
+By default the endpoint returns V1 formatted blocks to maintain backwards compatibility.
+
+**It's strongly recommended that you specify X-Block-Format: 2  for V2 formatted blocks as the default V1 format is deprecated and will be removed in future releases.** [What's the difference?](http-api.md#block-format)
+{% endhint %}
+
+See the [Block Format](http-api.md#block-format) section for details about the block structure and contents, with examples.
+
 ## Network and Node State
 
 Endpoints for getting information about the current network and node state.
@@ -892,7 +1011,7 @@ Network Info
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get the current network information.
+Get the current network information including height, current block, and other properties.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -928,13 +1047,13 @@ application/json
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="http://arweave.net" path="/peers" %}
+{% api-method method="get" host="http://arweave.net:1984" path="/peers" %}
 {% api-method-summary %}
 Peer list
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get the list of peers that the node. Nodes can only respond with peers they currently know about, so this will not be an exhaustive list of nodes on the network.
+Get the list of peers that the node. Nodes can only respond with peers they currently know about, so this will not be an exhaustive or complete list of nodes on the network.
 {% endapi-method-description %}
 
 {% api-method-spec %}
