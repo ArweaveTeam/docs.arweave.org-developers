@@ -285,7 +285,7 @@ JavaScript for example stores all numbers as double precision floating point val
 
 Endpoints for interacting with transactions and related resources.
 
-{% api-method method="get" host="http://arweave.net:1984" path="/tx/:id" %}
+{% api-method method="get" host="http://arweave.net:1984" path="/tx/{id}" %}
 {% api-method-summary %}
 Get Transaction by ID
 {% endapi-method-summary %}
@@ -301,6 +301,12 @@ Get a transaction by its ID.
 Transaction ID
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Accept" type="string" required=false %}
+application/json
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
 {% endapi-method-request %}
 
 {% api-method-response %}
@@ -363,7 +369,7 @@ Not Found.
 The **quantity** and **reward** values are always represented as winston strings. [**Why?**](http-api.md#winston-and-ar)\*\*\*\*
 {% endhint %}
 
-{% api-method method="get" host="http://arweave.net:1984" path="/tx/:id/:field" %}
+{% api-method method="get" host="http://arweave.net:1984" path="/tx/{id}/{field}" %}
 {% api-method-summary %}
 Get Transaction Field
 {% endapi-method-summary %}
@@ -383,6 +389,12 @@ Transaction ID
 Field name. Acceptable values: id, last\_tx, owner, tags, target, quantity, data, reward, signature
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Accept" type="string" required=false %}
+application/json
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
 {% endapi-method-request %}
 
 {% api-method-response %}
@@ -429,9 +441,9 @@ Not Found.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="http://arweave.net:1984" path="/tx/:id/data.:extension" %}
+{% api-method method="get" host="http://arweave.net:1984" path="/tx/{id}/data.{extension}" %}
 {% api-method-summary %}
-Get Transaction data
+Get Transaction Data
 {% endapi-method-summary %}
 
 {% api-method-description %}
@@ -444,11 +456,11 @@ The `Content-Type` will default to `text/html` so this endpoint will return a br
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
-{% api-method-parameter name="id" type="string" required=false %}
+{% api-method-parameter name="id" type="string" required=true %}
 Transaction ID
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="extension" type="string" required=false %}
+{% api-method-parameter name="extension" type="string" required=true %}
 Any extension can be specified depending on the clients use case. Web pages can be requested with `data.html` .
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
@@ -507,26 +519,94 @@ A **Content-Type** tag can be submitted with a transaction, the tag will then be
 The default Content-Type is **text/html**.
 {% endhint %}
 
+{% api-method method="get" host="http://arweave.net:1984" path="price/{bytes}/{target}" %}
+{% api-method-summary %}
+Get Transaction Price
+{% endapi-method-summary %}
+
+{% api-method-description %}
+This endpoint is used to calculate the minimum fee \(reward\) for a transaction of a specific size, and possibly to a specific address.  
+  
+For AR to AR wallet transfers where no data is being sent, 0 should be used and the target address should be specified.  
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="bytes" type="string" required=true %}
+The number of bytes to go into the transaction data field.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="target" type="string" required=false %}
+The target address if sending AR to another wallet.
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Accept" type="string" required=false %}
+application/json
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+Examples
+
+If sending 10 AR to address abc we would use /price/0/abc.
+
+If sending a data transaction with 123 bytes we would use /price/123.
+
+If sending 10 AR to another wallet with a data segment of 20 123 bytes we would use /price/123/abc.
+
 {% api-method method="post" host="http://arweave.net:1984" path="/tx" %}
 {% api-method-summary %}
 Submit a Transaction
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Submit a new transaction to the network.
+Submit a new transaction to the network.The request body should be a JSON object with the following attributes.
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-headers %}
+{% api-method-parameter name="Accept" type="string" required=false %}
+application/json
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="Content-Type" type="string" required=false %}
 application/json
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
+{% api-method-parameter name="id" type="string" required=false %}
+The transaction ID.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="last\_tx" type="string" required=true %}
+The last outgoing transaction ID from the sending wallet.
+{% endapi-method-parameter %}
+
 {% api-method-parameter name="owner" type="string" required=true %}
-The full RSA modulus value for the sending wallet, base64 URL encoded. The modulus is the `n` value from a JWK file.
+The full RSA modulus value for the sending wallet, base64 URL encoded. The modulus is the `n` value from a JWK.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="tags" type="array" required=true %}
+\[\]
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="target" type="string" required=true %}
@@ -538,11 +618,11 @@ The amount in winston to transfer to the `target` wallet. **Use an empty string 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="data" type="string" required=true %}
-The data to be uploaded, base64 URL encoded.
+The data to be uploaded, base64 URL encoded. **Use an empty string if not required.**
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="reward" type="string" required=true %}
-The transaction fee which can be calulated using X
+The transaction fee.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="signature" type="string" required=true %}
@@ -622,7 +702,7 @@ Get the current network information.
 {% api-method-request %}
 {% api-method-headers %}
 {% api-method-parameter name="Accept" type="string" required=false %}
-Application/json
+application/json
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
 {% endapi-method-request %}
@@ -651,8 +731,6 @@ Application/json
 {% endapi-method-spec %}
 {% endapi-method %}
 
-
-
 {% api-method method="get" host="http://arweave.net" path="/peers" %}
 {% api-method-summary %}
 Peer list
@@ -664,6 +742,12 @@ Get the list of peers that the node. Nodes can only respond with peers they curr
 
 {% api-method-spec %}
 {% api-method-request %}
+{% api-method-headers %}
+{% api-method-parameter name="Accept" type="string" required=false %}
+application/json
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+{% endapi-method-request %}
 
 {% api-method-response %}
 {% api-method-response-example httpCode=200 %}
@@ -681,4 +765,6 @@ Get the list of peers that the node. Nodes can only respond with peers they curr
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
+
+
 
