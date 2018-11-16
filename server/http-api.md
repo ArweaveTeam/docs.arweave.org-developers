@@ -2,9 +2,15 @@
 
 ## Introduction
 
-The Arweave procol is based on HTTP, so any existing http clients/libraries can be used to interface with the network. The default port is **1984**.
+The Arweave protocol is based on HTTP, so any existing http clients/libraries can be used to interface with the network, for example [Axios](https://github.com/axios/axios) or [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for JavaScript, [Guzzle](https://github.com/guzzle/guzzle) for PHP, etc.
 
-Requests and queries can be sent to any Arweave node directly using their IP address, for example [http://159.65.213.43:1984/info](http://159.65.213.43:1984/info). Hostnames can also be used if configured with DNS, for example [http://arweave.net:1984/info](http://arweave.net:1984/info).
+Arweave specific wrappers and clients are currently in development to simplify 
+
+The default port is **1984**.
+
+Requests and queries can be sent to any Arweave node directly using their IP address, for example [http://159.65.213.43:1984/info](http://159.65.213.43:1984/info).
+
+Hostnames can also be used if configured with DNS, for example [http://arweave.net:1984/info](http://arweave.net:1984/info).
 
 #### Sample Request
 
@@ -12,38 +18,54 @@ Requests and queries can be sent to any Arweave node directly using their IP add
 {% tab title="cURL" %}
 ```bash
 curl --request GET \
-  --url 'http://127.0.0.1:1984/info'
+  --url 'http://arweave.net:1984/info'
 ```
 {% endtab %}
 
-{% tab title="Javascript" %}
+{% tab title="Javascript \(Axios\)" %}
 ```javascript
-let xhr = new XMLHttpRequest();
+const axios = require('axios');
 
-xhr.addEventListener("readystatechange", function () {
-  if (this.readyState === 4) {
-    console.log(this.responseText);
-  }
+let api = axios.create({
+    baseURL: 'http://arweave.net:1984'
 });
 
-xhr.open("GET", "http://arweave.net:1984/info");
+api.get('info')
+.then( response => {
+  console.log('Arweave network height is: ' + response.data.height);
+})
+.catch( error => {
+  console.error(error);
+});
+```
+{% endtab %}
 
-xhr.send(data);
+{% tab title="JavaScript \(Fetch\)" %}
+```javascript
+fetch('http://arweave.net:1984/info')
+.then( response => ) {
+  console.log('Arweave network height is: ' + response.json().height);
+})
+.catch( error => {
+  console.error(error);
+});
 ```
 {% endtab %}
 
 {% tab title="NodeJS" %}
 ```javascript
-var request = require("request");
+let request = require("request");
 
-var options = { method: 'GET',
-  url: 'http://arweave.net:1984/info',
+let options = {
+ method: 'GET',
+ url: 'http://arweave.net:1984/info'
 };
 
-request(options, function (error, response, body) {
-  if (error) throw new Error(error);
-
-  console.log(body);
+request(options, function (error, response, body) { 
+  if (error){
+   console.error(error); 
+  }
+  console.log('Arweave network height is: ' + JSON.parse(body).height);
 });
 
 ```
@@ -80,7 +102,7 @@ if ($err) {
 {% endtab %}
 {% endtabs %}
 
-
+{% embed url="https://runkit.com/5beeb7cd1dfbbb001237207b/5beeb7cf29b0f30012b775d2" %}
 
 ## Schema
 
@@ -100,19 +122,87 @@ See the [sample transactions](http-api.md#sample-transactions) below for full ex
 
 #### Field Definitions
 
-| Name | Required | Value |
-| :--- | :--- | :--- |
-| id | Yes | The transaction ID is derrived from the Base64 URL encoding of a SHA-256 hash of the Base64 decoded [transaction signature](http-api.md#transaction-signing). |
-| last\_tx | Yes | The last outgoing transaction ID from the sending wallet. Use the value returned from . If this is the first transaction from the wallet then an empty string should be used. |
-| owner | Yes | The full RSA modulus value of the sending wallet, Base64 URL encoded. The modulus is the `n` value from the JWK. |
-| tags | No | If no tags are being used then use an empty array. |
-| target | No | The target address when sending AR, the amount to transfer should be specified in the quantity field. If no AR is being transferred to another wallet then use an empty string. |
-| quantity | No | The amount to transfer from the owner wallet to the target wallet address as a [winston string](http-api.md#ar-and-winston). If no AR is being transferred then use an empty string. |
-| data | No | The data to be submitted as a Base64 URL encoded string. If no data is being submitted then use an empty string. |
-| reward | Yes | The transaction fee as a [winston string](http-api.md#ar-and-winston), this should be calculated using the fee endpoint. |
-| signature | Yes | The transaction signature is derrived from concatenating the transaction data then signing it, the signature should then be Base64 URL encoded. See [Transaction Signing](http-api.md#transaction-signing) for more. |
-
-
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Required</th>
+      <th style="text-align:left">Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>id</code>
+      </td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">The transaction ID is derrived from the Base64 URL encoding of a SHA-256
+        hash of the Base64 decoded <a href="http-api.md#transaction-signing">transaction signature</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>last_tx</code>
+      </td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">
+        <p>The last outgoing transaction ID from the sending wallet. If this is the
+          first transaction from the wallet then an empty string should be used.</p>
+        <p></p>
+        <p>Use the value returned from the <a href="http-api.md#get-last-transaction-id">last transaction</a> endpoint.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>owner</code>
+      </td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">The full RSA modulus value of the sending wallet, Base64 URL encoded.
+        The modulus is the <code>n</code> value from the <a href="http-api.md#key-format">JWK</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>tags</code>
+      </td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left">If no tags are being used then use an empty array <code>[]</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>target</code>
+      </td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left">The target address to send AR to (if required), the amount to transfer
+        should be specified in the <code>quantity</code> field. If no AR is being
+        transferred to another wallet then use an empty string.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>quantity</code>
+      </td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left">The amount to transfer from the <code>owner</code> wallet to the <code>target</code> wallet
+        address as a <a href="http-api.md#ar-and-winston">winston string</a>. If
+        no AR is being transferred then use an empty string.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>data</code>
+      </td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left">The data to be submitted as a Base64 URL encoded string. If no data is
+        being submitted then this should be an empty string.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>reward</code>
+      </td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">The transaction fee as a <a href="http-api.md#ar-and-winston">winston string</a>,
+        this should be calculated using the <a href="http-api.md#get-transaction-price">price endpoint</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>signature</code>
+      </td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">The transaction signature is derrived from concatenating the transaction
+        data then signing it, the signature should then be Base64 URL encoded.
+        See <a href="http-api.md#transaction-signing">Transaction Signing</a> for
+        more.</td>
+    </tr>
+  </tbody>
+</table>
 
 #### **Transaction Use Cases**
 
@@ -253,7 +343,13 @@ It's widely supported with libraries for most popular languages. It's possible t
 
 If you're generating your own keys manually **the public exponent \(e\) must be 65537**. If any other value is used then transactions signed by these keys will be invalid and rejected.
 
+#### Addressing
+
+The `n` value is the public modulus and is used as the [transaction owner field](http-api.md#transaction-format), and the address of a wallet is a Base64 URL encoded SHA-256 hash of the `n` value from the JWK.
+
 #### Sample JWK
+
+The address for this wallet is `GRQ7swQO1AMyFgnuAPI7AvGQlW3lzuQuwlJbIpWV7xk`.
 
 ```javascript
 {
@@ -268,8 +364,6 @@ If you're generating your own keys manually **the public exponent \(e\) must be 
     "qi": "aDsPYxE-JBYsYhCYXSU7WsCrnFxNsRpFMcYXdmdryYIdQUpeemChDGzVJXLnJhE4cAS9TtLcNg82xZSKZvHrnkbFpRfSJxzEnvIXW4V0LHkxkxbmM0e9B7UrpYm6LKtvEY6I7L8wHFpHdOwV6NjY925oULEV156X0r55V7N0XF-jy3rbm71DCWRh6IDRghhCZQ3aNgJxE-OtnABqasaY6CQnTDRXLkGE0kq9GCx85-92fQLHMzvrMhr9m_2MHYJ_gZehL4j95CQzhD3Zh602D0YYYwRSsU4h5HGjlmN52pe-rfTLgwCJq5295s7qUP8TTMzbZAOM_hehksHpAaFghA"
 }
 ```
-
-
 
 ### AR and Winston
 
@@ -312,7 +406,7 @@ application/json
 {% api-method-response %}
 {% api-method-response-example httpCode=200 %}
 {% api-method-response-example-description %}
-Read about here
+The transaction as a JSON object.
 {% endapi-method-response-example-description %}
 
 ```javascript
@@ -363,10 +457,10 @@ Not Found.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-\*\*\*\*[**http://arweave.net:1984/tx/BNttzDav3jHVnNiV7nYbQv-GY0HQ-4XXsdkE5K9ylHQ**](http://arweave.net:1984/tx/BNttzDav3jHVnNiV7nYbQv-GY0HQ-4XXsdkE5K9ylHQ)\*\*\*\*
+See full examples in the [transaction format section](http-api.md#transaction-format).
 
 {% hint style="info" %}
-The **quantity** and **reward** values are always represented as winston strings. [**Why?**](http-api.md#winston-and-ar)\*\*\*\*
+The **quantity** and **reward** values are always represented as winston strings. [**What and why?**](http-api.md#winston-and-ar)\*\*\*\*
 {% endhint %}
 
 {% api-method method="get" host="http://arweave.net:1984" path="/tx/{id}/{field}" %}
@@ -527,18 +621,21 @@ Get Transaction Price
 {% api-method-description %}
 This endpoint is used to calculate the minimum fee \(reward\) for a transaction of a specific size, and possibly to a specific address.  
   
-For AR to AR wallet transfers where no data is being sent, 0 should be used and the target address should be specified.  
+This endpoint should always be used to calculate transaction fees as closely to the submission time as possible. Pricing is dynamic and determined by the network, so it's not always possible to accurately calculate prices offline or ahead of time.  
+  
+**Transactions with a fee that's too low will simply be rejected.**  
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
 {% api-method-parameter name="bytes" type="string" required=true %}
-The number of bytes to go into the transaction data field.
+The number of bytes to go into the transaction data field.  
+**If sending AR to another wallet with no data attached, then 0 should be used.**
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="target" type="string" required=false %}
-The target address if sending AR to another wallet.
+The target wallet address if sending AR to another wallet.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 
@@ -563,13 +660,17 @@ application/json
 {% endapi-method-spec %}
 {% endapi-method %}
 
-Examples
+{% hint style="warning" %}
+**The fee for the first transaction sent to a new wallet address will be 0.25 AR more expensive than other transactions.** This is intentional and to discourage wallet spam.
+{% endhint %}
 
-If sending 10 AR to address abc we would use /price/0/abc.
+**Examples**
 
-If sending a data transaction with 123 bytes we would use /price/123.
+If sending 10 AR to a wallet with address `abc` we would use `/price/0/abc`.
 
-If sending 10 AR to another wallet with a data segment of 20 123 bytes we would use /price/123/abc.
+If sending a data transaction with 123 bytes we would use `/price/123`.
+
+If sending 10 AR to another wallet with a data segment of  123 bytes we would use `/price/123/abc`.
 
 {% api-method method="post" host="http://arweave.net:1984" path="/tx" %}
 {% api-method-summary %}
@@ -593,7 +694,7 @@ application/json
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
-{% api-method-parameter name="id" type="string" required=false %}
+{% api-method-parameter name="id" type="string" required=true %}
 The transaction ID.
 {% endapi-method-parameter %}
 
@@ -679,6 +780,102 @@ The nodes was unable to verify the transaction.
 
 ```
 Transaction verification failed.
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% hint style="info" %}
+**Find more information** about these fields and examples in the [transaction format](http-api.md#transaction-format) section.
+{% endhint %}
+
+## Wallets
+
+Endpoints for getting information about a wallets.
+
+{% api-method method="get" host="http://arweave.net:1984" path="/wallet/{address}/balance" %}
+{% api-method-summary %}
+Get a Wallet Balance
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Get the ballance for a given wallet. Unknown wallet addresses will simply return 0.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="address" type="string" required=false %}
+Wallet address.
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+The balance as a winston string.
+{% endapi-method-response-example-description %}
+
+```
+9554799572505
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+Error response if the given address is incorrectly formatted.
+{% endapi-method-response-example-description %}
+
+```
+Invalid address.
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% hint style="info" %}
+Wallet balances are always represented as winston strings. [**What and why?**](http-api.md#winston-and-ar)\*\*\*\*
+{% endhint %}
+
+{% api-method method="get" host="http://arweave.net:1984" path="/wallet/{address}/last\_tx" %}
+{% api-method-summary %}
+Get Last Transaction ID
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Get the last outgoing transaction for the given wallet address.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="address" type="string" required=false %}
+Wallet address.
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+The last transaction ID a sa string.
+{% endapi-method-response-example-description %}
+
+```
+7SRpf0dWDqN4hbnCMPkdg02u_tzyMBtqwjDBy3EU9dg
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+Error response if the given address is incorrectly formatted.
+{% endapi-method-response-example-description %}
+
+```
+Invalid address.
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
