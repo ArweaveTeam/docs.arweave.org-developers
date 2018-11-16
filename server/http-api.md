@@ -8,8 +8,6 @@ description: An overview of the Arweave HTTP API.
 
 The Arweave protocol is based on HTTP, so any existing http clients/libraries can be used to interface with the network, for example [Axios](https://github.com/axios/axios) or [Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for JavaScript, [Guzzle](https://github.com/guzzle/guzzle) for PHP, etc.
 
-Arweave specific wrappers and clients are currently in development to simplify common operations and API interactions.
-
 The default port is **1984**.
 
 Requests and queries can be sent to any Arweave node directly using their IP address, for example [http://159.65.213.43:1984/info](http://159.65.213.43:1984/info).
@@ -58,7 +56,9 @@ request(options, function (error, response, body) {
 {% endtab %}
 {% endtabs %}
 
+### Integrations
 
+Arweave specific wrappers and clients are currently in development to simplify common operations and API interactions, there are currently integrations for [Go](https://github.com/Dev43/arweave-go), [PHP](https://github.com/ArweaveTeam/arweave-php), and [Scala](https://github.com/toknapp/arweave4s) \(which can also be used with Java and C\#\).
 
 ## Schema
 
@@ -70,7 +70,7 @@ Common data structures, formats, and processes explained.
 
 There are currently two block formats a node may return depending on how you request the block.
 
-The initial V1 format has the full block hash list and wallet list embedded directly in the block JSON structure, this has since been removed, these can now be requested using the hash list endpoint and wallet lists endpoint.
+The initial V1 format has the full block hash list and wallet list embedded directly in the block JSON structure, this has since been removed and can now be requested using the hash list endpoint and wallet lists endpoint.
 
 {% hint style="danger" %}
 **The V1 block format has been deprecated and will be removed in future releases.**
@@ -994,9 +994,9 @@ Block not found.
 {% endapi-method %}
 
 {% hint style="danger" %}
-By default the endpoint returns V1 formatted blocks to maintain backwards compatibility.
+**It's strongly recommended that you specify X-Block-Format: 2  for V2 formatted blocks. The default V1 format is deprecated and will be removed in future releases.** [What's the difference?](http-api.md#block-format)
 
-**It's strongly recommended that you specify X-Block-Format: 2  for V2 formatted blocks as the default V1 format is deprecated and will be removed in future releases.** [What's the difference?](http-api.md#block-format)
+By default the endpoint returns V1 formatted blocks to maintain backwards compatibility.
 {% endhint %}
 
 See the [Block Format](http-api.md#block-format) section for details about the block structure and contents, with examples.
