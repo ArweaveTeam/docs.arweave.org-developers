@@ -408,7 +408,7 @@ The address for this wallet is `GRQ7swQO1AMyFgnuAPI7AvGQlW3lzuQuwlJbIpWV7xk`.
 
 Winston is the smallest possible unit of AR, similar to a [satoshi](https://en.bitcoin.it/wiki/Satoshi_%28unit%29) in Bitcoin, or [wei](http://ethdocs.org/en/latest/ether.html#denominations) in Etherium.
 
-**1 AR** = 1000000000000 Winston \(12 zeros\) and **1 Winston** = 0.0000000000001 AR.
+**1 AR** = 1000000000000 Winston \(12 zeros\) and **1 Winston** = 0.000000000001 AR.
 
 The HTTP API will return all amounts as winston strings, this is to allow for easy interoperability between environments that do not accommodate arbitrary-precision arithmetic.
 
