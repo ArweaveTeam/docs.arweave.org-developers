@@ -1,8 +1,14 @@
 # Arweave Deploy
 
+## Introduction
+
+Arweave Deploy is a small and very simple CLI tool for uploading data to the Arweave network.
+
+There are just three commands 
+
 ## Installation
 
-### NPM
+### Install with NPM
 
 Arweave Deploy is a [Node.js](https://nodejs.org/en) CLI applicaiton, so it can be installed and updated using [NPM](https://www.npmjs.com) \(Node Package Manager\). NPM is automatically installed as part of Node.js.
 
@@ -16,9 +22,23 @@ npm install -g arweave-deploy
 
 The `-g` flag installs the package globally so you can access it from any directory.
 
-### Binaries
+#### Usage
 
-If you dont have or want to install Node.js, have an incompatible version, or using NPM isn't suitable, then you can download one of the precompiled binaries which can be run directly.
+By installing Arweave Deploy globally using NPM you should be able to run the command from anywhere on your system.
+
+#### Updating
+
+```text
+npm update -g arweave-deploy
+```
+
+### Download Binaries
+
+Instead of using NPM you can simply download one of the precompiled binaries which are self-contained.
+
+#### Installation
+
+Simply download the binary for your OS below, the application is self-contained and has Node.js embedded, so it doesn't matter which \(if any\) version of Node you may have installed on your system.
 
 | Platform | Link |
 | :--- | :--- |
@@ -26,11 +46,19 @@ If you dont have or want to install Node.js, have an incompatible version, or us
 | Windows | Download |
 | Linux | Download |
 
-### How to run
+#### Usage
 
-Simply download the binary for your OS from above and either move it to your application directory, 
+Make sure the file is executable, if it isn't you should be able to simply do this on a \*nix system using the following.
 
-### 
+```text
+chmod +x arweave-deploy
+```
+
+If you want to be able to run Arweave Deploy from any directory on your system, assuming a \*nix system, you can move the binary file to `/usr/local/bin`.
+
+#### Updating
+
+As the binary files are self-contained and unmanaged, to update them you simply need to download the latest binary and replace the previous file.
 
 ## Usage
 
