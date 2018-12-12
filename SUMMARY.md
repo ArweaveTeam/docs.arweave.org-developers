@@ -6,6 +6,10 @@
 
 * [HTTP API](server/http-api.md)
 
+## Tools
+
+* [Arweave Deploy](tools/arweave-deploy.md)
+
 ## Libraries/SDKs
 
 * [Go](https://github.com/Dev43/arweave-go)
