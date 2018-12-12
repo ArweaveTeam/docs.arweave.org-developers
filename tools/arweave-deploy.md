@@ -69,9 +69,9 @@ Simply download the binary for your OS below, the application is self-contained 
 
 | Platform | Link |
 | :--- | :--- |
-| Mac OS | Download |
-| Windows | Download |
-| Linux | Download |
+| Mac OS | [Download](https://github.com/ArweaveTeam/arweave-deploy/raw/master/dist/bin/macos/arweave-deploy) |
+| Windows | [Download](https://github.com/ArweaveTeam/arweave-deploy/raw/master/dist/bin/linux/arweave-deploy) |
+| Linux | [Download](https://github.com/ArweaveTeam/arweave-deploy/raw/master/dist/bin/windows/arweave-deploy.exe) |
 
 #### Usage
 
@@ -175,14 +175,27 @@ Default format: `0.000636904150 AR`Winston format: `636904150 Winston`
 
 The content type will be automatically detected and the data will be tagged with it, when nodes serve the data they will serve it with this content type header. Incorrect content types can cause some file types to not load correctly in web browsers.
 
-E.g.
+An incomplete list of content types can be found 
+
+The following will render the HTML document in browsers as a normal webpage.
 
 ```text
 arweave-deploy upload index.html --key test.json
 
 Arweave Deploy / Upload
-File: test.json
-Type: application/json
+File: test.html
+Type: text/html
+Size: 3.08 kB
+```
+
+The following will **not** render the HTML document in browsers, it will simply display the source as plain text.
+
+```text
+arweave-deploy upload index.html --content-type text/plain --key test.json
+
+Arweave Deploy / Upload
+File: index.html
+Type: text/plain
 Size: 3.08 kB
 ```
 
