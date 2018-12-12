@@ -6,6 +6,33 @@ Arweave Deploy is a small and very simple CLI tool for uploading data to the Arw
 
 The motivation for this tool was to provide a simple interface to do this, so there are just three commands: [upload](arweave-deploy.md#upload-a-file) for uploading a file, [test](arweave-deploy.md#test-an-upload) to check the file size, price, and that your key is valid, and [balance](arweave-deploy.md#check-your-balance) for checking the balance for your key file.
 
+### Quickstart
+
+```text
+Usage:
+  arweave-deploy [command] [options]
+
+Options:
+  --winston                   Display winston values instead of AR.
+  --force-skip-confirmation   Skip warnings and confirmation and force upload.
+  --force-skip-warnings       Skip warnings and disable safety checks.
+  --key <key_string_or_path>  Path to an Arweave key file, or the Arweave key value as a string.
+  -h, --help                  output usage information
+
+Commands:
+  balance                     Get the balance of your wallet.
+  test <file_path>            Test the deployment without committing anything
+  upload <file_path>          Deploy a file to the weave
+
+Examples:
+  upload index.html --key keyfile.json
+  test index.html --key keyfile.json
+  balance --key keyfile.json
+
+More help:
+  https://docs.arweave.org/developers/tools/arweave-deploy
+```
+
 ## Installation
 
 ### Install with NPM
@@ -65,7 +92,7 @@ As the binary files are self-contained and unmanaged, to update them you simply 
 ### Upload a file
 
 ```text
-arweave-deploy upload [file path to upload] --key [arweave key file path]
+arweave-deploy upload [file path to upload] --key [path to arweave key file]
 ```
 
 #### Example
@@ -81,33 +108,24 @@ Price: 0.000349612332 AR
 Current balance: 0.747511899891 AR
 Balance after uploading: 0.747162287559 AR
 
-Continue? (y/n)
+Carefully check the above details are correct, then Type CONFIRM to complete this upload 
 ```
 
-#### You'll be asked to confirm the transaction
+You'll be asked to confirm the transaction, type CONFIRM and hit enter to continue.
 
 ```text
-Continue? (y/n) y
 Your file is deploying! 🚀
 Once your file is mined into a block it'll be available on the following URL
 
 http://arweave.net/r7Ao2z4a1nCOlmIZjZVJHSMa1QACGcQDw6Bg6xwx88Q
 ```
 
-#### Or you may cancel
-
-```text
-Continue? (y/n) n
-
-Error: Upload cancelled
-```
-
 ### Test an upload
 
-Before uploading a file, you can test to see how much the deployment will cost, some information about the upload, and check that your key is valid. 
+Before uploading a file, you can test to see how much the deployment will cost, get some information about the upload, and check that your key is valid. 
 
 ```text
-arweave-deploy test [file path to upload] --key [arweave key file path]
+arweave-deploy test [file path to upload] --key [path to arweave key file]
 ```
 
 #### Example
@@ -118,7 +136,6 @@ Arweave Deploy / Test
 TEST MODE - Nothing will actually be uploaded as part of this process.
 
 File: test.html
-
 Type: text/html
 Size: 284.00 Bytes
 Wallet address: pEbU_SLfRzEseum0_hMB1Ie-hqvpeHWypRhZiPoioDI
@@ -134,7 +151,7 @@ http://arweave.net/r7Ao2z4a1nCOlmIZjZVJHSMa1QACGcQDw6Bg6xwx88Q
 ### Check your balance
 
 ```text
-arweave-deploy balance --key [arweave key file path]
+arweave-deploy balance --key [path to arweave key file]
 ```
 
 #### Example
@@ -146,5 +163,50 @@ Address: pEbU_SLfRzEseum0_hMB1Ie-hqvpeHWypRhZiPoioDI
 Balance: 0.747511899891 AR
 ```
 
+### Options
 
+#### --winston
+
+Show balances and upload prices in winston inetad of AR.
+
+Default format: `0.000636904150 AR`Winston format: `636904150 Winston`
+
+**--content-type**
+
+The content type will be automatically detected and the data will be tagged with it, when nodes serve the data they will serve it with this content type header. Incorrect content types can cause some file types to not load correctly in web browsers.
+
+E.g.
+
+```text
+arweave-deploy upload index.html --key test.json
+
+Arweave Deploy / Upload
+File: test.json
+Type: application/json
+Size: 3.08 kB
+```
+
+{% hint style="danger" %}
+**DANGER ZONE OPTIONS**
+{% endhint %}
+
+#### --force-skip-confirmation
+
+This option will skip the upload confirmation step. This can be useful for unattended and automated usages however **this should be used with extreme caution** as transactions can't be cancelled.
+
+```text
+Carefully check the above details are correct, then Type CONFIRM to complete this upload 
+```
+
+This confirmation step will be skipped.
+
+**--force-skip-warnings**
+
+By default, Arweave Deploy will check the contents of the file to be uploaded for key fragments, if the data looks like it might contain parts of an RSA key it'll warn you and ask for confirmation to proceed.
+
+```text
+The data you're uploading looks like it might be a key file, are you sure you want to continue? Y/N (default: N)
+```
+
+\*\*\*\*
 
