@@ -58,7 +58,7 @@ request(options, function (error, response, body) {
 
 ### Integrations
 
-Arweave specific wrappers and clients are currently in development to simplify common operations and API interactions, there are currently integrations for [Go](https://github.com/Dev43/arweave-go), [PHP](https://github.com/ArweaveTeam/arweave-php), and [Scala](https://github.com/toknapp/arweave4s) \(which can also be used with Java and C\#\).
+Arweave specific wrappers and clients are currently in development to simplify common operations and API interactions, there are currently integrations for [Go](https://github.com/Dev43/arweave-go), [PHP](https://github.com/ArweaveTeam/arweave-php), [Scala](https://github.com/toknapp/arweave4s) \(which can also be used with Java and C\#\) and [JavaScript/TypeScript/NodeJS](https://github.com/ArweaveTeam/arweave-js).
 
 ## Schema
 
