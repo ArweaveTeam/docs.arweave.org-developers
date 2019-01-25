@@ -2,13 +2,14 @@
 
 * [Getting Started](README.md)
 
-## Arweave Server
+## Arweave Node Server
 
 * [HTTP API](server/http-api.md)
 
-## Tools
+## Arweave Deploy
 
-* [Arweave Deploy](tools/arweave-deploy.md)
+* [Manual](tools/arweave-deploy.md)
+* [Getting Started](tools/getting-started.md)
 
 ## Libraries/SDKs
 

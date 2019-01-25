@@ -1,8 +1,8 @@
-# Arweave Deploy
+# Manual
 
 ## Introduction
 
-Arweave Deploy is a small and very simple CLI tool for uploading data to the Arweave network. It's build on Node so can simply be [installed as a global node package](arweave-deploy.md#install-with-npm) or you can just [download the latest binary](arweave-deploy.md#download-binaries).
+Arweave Deploy is a small and very simple CLI tool for uploading data to the Arweave network. It's built on Node so can simply be [installed as a global node package](arweave-deploy.md#install-with-npm) or you can just [download the latest binary](arweave-deploy.md#download-binaries).
 
 The motivation for this tool was to provide a simple interface to do this, so there are just three commands: [upload](arweave-deploy.md#upload-a-file) for uploading a file, [test](arweave-deploy.md#test-an-upload) to check the file size, price, and that your key is valid, and [balance](arweave-deploy.md#check-your-balance) for checking the balance for your key file.
 
