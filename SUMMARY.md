@@ -8,8 +8,7 @@
 
 ## Arweave Deploy
 
-* [Manual](tools/arweave-deploy.md)
-* [Getting Started](tools/getting-started.md)
+* [User Guide](tools/arweave-deploy.md)
 
 ## Libraries/SDKs
 
