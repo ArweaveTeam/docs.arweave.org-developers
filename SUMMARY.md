@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Getting Started](README.md)
+* [Mining Docs](https://docs.arweave.org)
 
 ## Arweave Node Server
 
