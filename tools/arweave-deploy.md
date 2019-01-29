@@ -6,56 +6,17 @@ description: >-
 
 # User Guide
 
-## Deploying permaweb apps and pages
-
-You're just a few short steps away from becoming part of the Arweave permaweb! Say goodbye to traditional web and it's inefficient, expensive, and time consuming hosting environment. Deploying to the permaweb is cheap \(or even free!\), quick, and permanent. 
-
 ## Introduction
 
 Arweave Deploy is a small and very simple CLI tool for uploading data to the Arweave network. It's built on Node so can simply be [installed as a global Node package](arweave-deploy.md#install-with-npm) or you can just [download the latest binary](arweave-deploy.md#download-binaries).
 
-We have kept this tool easy to use, so there are just three commands: [upload](arweave-deploy.md#upload-a-file) to upload a file, [test](arweave-deploy.md#test-an-upload) to check the file size, price, and that your key is valid, and [balance](arweave-deploy.md#check-your-balance) for checking the balance of your key file.
-
-### Quickstart 
-
-Wait a moment: If you don't have any tokens to deploy with yet we'd love to give you some for free to welcome you to the permaweb! Just visit our website here to claim your free tokens. 
-
-```text
-Usage:
-  arweave-deploy [command] [options]
-
-Options:
-  --winston                   Display winston values instead of AR.
-  --force-skip-confirmation   Skip warnings and confirmation and force upload.
-  --force-skip-warnings       Skip warnings and disable safety checks.
-  --key <key_string_or_path>  Path to an Arweave key file, or the Arweave key value as a string.
-  -h, --help                  output usage information
-
-Commands:
-  balance                     Get the balance of your wallet.
-  test <file_path>            Test the deployment without committing anything
-  upload <file_path>          Deploy a file to the weave
-
-Examples:
-  upload index.html --key keyfile.json
-  test index.html --key keyfile.json
-  balance --key keyfile.json
-
-More help:
-  https://docs.arweave.org/developers/tools/arweave-deploy
-```
+Wait a moment: If you don't have any tokens to deploy with yet we'd love to give you some for free to welcome you to the permaweb! Just visit our website here to claim your free tokens 
 
 ## Installation
 
 ### Install with NPM
 
-Arweave Deploy is a [Node.js](https://nodejs.org/en) CLI application, so it can be installed and updated using [NPM](https://www.npmjs.com) \(Node Package Manager\). NPM is automatically installed as part of Node.js.
-
-Node 10+ is recommended as it's the latest LTS version and has native support for some RSA encryption functions which are not available in previous versions.
-
-#### Installation
-
-Use this to install the Arweave Deploy software. 
+Arweave Deploy is a [Node.js](https://nodejs.org/en) CLI application, so it can be installed and updated using [NPM](https://www.npmjs.com). Node 10+ is required as this is the first version to support more native RSA functions. 
 
 ```text
 npm install -g arweave-deploy
@@ -63,21 +24,15 @@ npm install -g arweave-deploy
 
 Note: the `-g` flag installs the package globally so you can access it from any directory.
 
-#### Usage
-
-By installing Arweave Deploy globally using NPM you should be able to run the command from anywhere on your system.
-
-#### Updating
-
 Use this to update the Arweave Deploy software. 
 
 ```text
 npm update -g arweave-deploy
 ```
 
-### Download the latest binary
+### Download
 
-If you prefer, instead of using NPM you can simply download one of the precompiled,  self-contained binaries.
+If you prefer or are running an older version of Node, instead of using NPM you can simply download one of the precompiled, self-contained binaries.
 
 #### Installation
 
@@ -85,9 +40,10 @@ Simply download the binary for your OS below. The application is self-contained 
 
 | Platform | Link |
 | :--- | :--- |
-| Mac OS | [Download](https://github.com/ArweaveTeam/arweave-deploy/raw/master/dist/bin/macos/arweave-deploy) |
-| Windows | [Download](https://github.com/ArweaveTeam/arweave-deploy/raw/master/dist/bin/linux/arweave-deploy) |
-| Linux | [Download](https://github.com/ArweaveTeam/arweave-deploy/raw/master/dist/bin/windows/arweave-deploy.exe) |
+| Mac OS | [Download](https://github.com/ArweaveTeam/arweave-deploy/blob/master/dist/macos/arweave) |
+| Windows x64 | [Download](https://github.com/ArweaveTeam/arweave-deploy/blob/master/dist/windows/arweave-x64.exe) |
+| Windows x86 | [Download](https://github.com/ArweaveTeam/arweave-deploy/blob/master/dist/windows/arweave-x86.exe) |
+| Linux | [Download](https://github.com/ArweaveTeam/arweave-deploy/blob/master/dist/linux/arweave) |
 
 #### Usage
 
@@ -110,14 +66,14 @@ Instructions for using the Arweave Deploy tool.
 ### Upload a file
 
 ```text
-arweave-deploy upload [file path to upload] --key [path to arweave key file]
+arweave deploy [file path to upload] --key [path to arweave key file]
 ```
 
 #### Example
 
 ```text
-arweave-deploy upload index.html --key keyfile.json 
-Arweave Deploy / Upload
+arweave deploy index.html --key keyfile.json 
+
 File: index.html
 Type: text/html
 Size: 284.00 Bytes
@@ -138,47 +94,21 @@ Once your file is mined into a block it'll be available on the following URL
 http://arweave.net/r7Ao2z4a1nCOlmIZjZVJHSMa1QACGcQDw6Bg6xwx88Q
 ```
 
-### Test an upload
 
-Before uploading a file, you can test to see how much the deployment will cost, get some information about the upload, and check that your key is valid. 
-
-```text
-arweave-deploy test [file path to upload] --key [path to arweave key file]
-```
-
-#### Example
-
-```text
-arweave-deploy test index.html --key keyfile.json
-Arweave Deploy / Test
-TEST MODE - Nothing will actually be uploaded as part of this process.
-
-File: test.html
-Type: text/html
-Size: 284.00 Bytes
-Wallet address: pEbU_SLfRzEseum0_hMB1Ie-hqvpeHWypRhZiPoioDI
-Price: 0.000349612332 AR
-Current balance: 0.747511899891 AR
-Balance after uploading: 0.747162287559 AR
-
-The URL for your file would be
-
-http://arweave.net/r7Ao2z4a1nCOlmIZjZVJHSMa1QACGcQDw6Bg6xwx88Q
-```
 
 ### Check your balance
 
 Use this to check the remaining token balance of your key file. 
 
 ```text
-arweave-deploy balance --key [path to arweave key file]
+arweave balance --key [path to arweave key file]
 ```
 
 #### Example
 
 ```text
-arweave-deploy balance --key keyfile.json
-Arweave Deploy / Balance check
+arweave balance --key keyfile.json
+
 Address: pEbU_SLfRzEseum0_hMB1Ie-hqvpeHWypRhZiPoioDI
 Balance: 0.747511899891 AR
 ```
@@ -198,9 +128,8 @@ The content type will be automatically detected and the data will be tagged with
 The following will render the HTML document in browsers as a normal webpage:
 
 ```text
-arweave-deploy upload index.html --key test.json
+arweave deploy index.html --key test.json
 
-Arweave Deploy / Upload
 File: test.html
 Type: text/html
 Size: 3.08 kB
@@ -209,9 +138,8 @@ Size: 3.08 kB
 The following will **not** render the HTML document in browsers, it will simply display the source as plain text:
 
 ```text
-arweave-deploy upload index.html --content-type text/plain --key test.json
+arweave deploy index.html --content-type text/plain --key test.json
 
-Arweave Deploy / Upload
 File: index.html
 Type: text/plain
 Size: 3.08 kB
