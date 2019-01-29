@@ -40,10 +40,10 @@ Simply download the binary for your OS below. The application is self-contained 
 
 | Platform | Link |
 | :--- | :--- |
-| Mac OS | [Download](https://github.com/ArweaveTeam/arweave-deploy/blob/master/dist/macos/arweave) |
-| Windows x64 | [Download](https://github.com/ArweaveTeam/arweave-deploy/blob/master/dist/windows/arweave-x64.exe) |
-| Windows x86 | [Download](https://github.com/ArweaveTeam/arweave-deploy/blob/master/dist/windows/arweave-x86.exe) |
-| Linux | [Download](https://github.com/ArweaveTeam/arweave-deploy/blob/master/dist/linux/arweave) |
+| Mac OS | [Download](https://github.com/ArweaveTeam/arweave-deploy/raw/master/dist/macos/arweave) \(1.0.3-BETA\) |
+| Windows x64 | [Download](https://github.com/ArweaveTeam/arweave-deploy/raw/master/dist/windows/arweave-x64.exe) \(1.0.3-BETA\) |
+| Windows x86 | [Download](https://github.com/ArweaveTeam/arweave-deploy/raw/master/dist/windows/arweave-x86.exe) \(1.0.3-BETA\) |
+| Linux | [Download](https://github.com/ArweaveTeam/arweave-deploy/raw/master/dist/linux/arweave) \(1.0.3-BETA\) |
 
 #### Usage
 
