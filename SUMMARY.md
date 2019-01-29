@@ -10,6 +10,7 @@
 ## Arweave Deploy
 
 * [User Guide](tools/arweave-deploy.md)
+* [License](tools/license.md)
 
 ## Libraries/SDKs
 
