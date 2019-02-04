@@ -72,13 +72,13 @@ Instructions for using the Arweave Deploy tool.
 ### Upload a file
 
 ```text
-arweave deploy [file path to upload] --key [path to arweave key file]
+arweave deploy [file path to upload] --key-file [path to arweave key file]
 ```
 
 #### Example
 
 ```text
-arweave deploy index.html --key keyfile.json 
+arweave deploy index.html --key-file keyfile.json 
 
 File: index.html
 Type: text/html
@@ -107,13 +107,13 @@ http://arweave.net/r7Ao2z4a1nCOlmIZjZVJHSMa1QACGcQDw6Bg6xwx88Q
 Use this to check the remaining token balance of your key file. 
 
 ```text
-arweave balance --key [path to arweave key file]
+arweave balance --key-file [path to arweave key file]
 ```
 
 #### Example
 
 ```text
-arweave balance --key keyfile.json
+arweave balance --key-file keyfile.json
 
 Address: pEbU_SLfRzEseum0_hMB1Ie-hqvpeHWypRhZiPoioDI
 Balance: 0.747511899891 AR
@@ -134,7 +134,7 @@ The content type will be automatically detected and the data will be tagged with
 The following will render the HTML document in browsers as a normal webpage:
 
 ```text
-arweave deploy index.html --key test.json
+arweave deploy index.html --key-file test.json
 
 File: test.html
 Type: text/html
@@ -144,7 +144,7 @@ Size: 3.08 kB
 The following will **not** render the HTML document in browsers, it will simply display the source as plain text:
 
 ```text
-arweave deploy index.html --content-type text/plain --key test.json
+arweave deploy index.html --content-type text/plain --key-file test.json
 
 File: index.html
 Type: text/plain
