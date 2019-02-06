@@ -15,7 +15,7 @@ description: >-
 Arweave Deploy is a small and very simple CLI tool for uploading data to the Arweave network. It's built on Node so can simply be [installed as a global Node package](arweave-deploy.md#install-with-npm) or you can just [download the latest binary](arweave-deploy.md#download).
 
 {% hint style="info" %}
-**Wait a moment**: If you don't have any tokens to deploy with yet we'd love to give you some for free to welcome you to the permaweb! [Claim your free tokens here](https://tokens.arweave.org/#/deploy).
+**Wait a moment**: If you don't have any tokens to deploy with yet we'd love to give you some for free to welcome you to the permaweb! [Claim your free tokens here](https://tokens.arweave.org).
 {% endhint %}
 
 ## Installation
