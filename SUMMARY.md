@@ -9,7 +9,8 @@
 
 ## Arweave Deploy
 
-* [User Guide](tools/arweave-deploy.md)
+* [User Guide](tools/arweave-deploy/README.md)
+  * [HTML Packaging](tools/arweave-deploy/html-packaging.md)
 * [License](tools/license.md)
 
 ## Libraries/SDKs
