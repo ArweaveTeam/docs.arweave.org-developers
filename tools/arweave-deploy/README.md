@@ -4,7 +4,7 @@ description: >-
   permaweb.
 ---
 
-# User Guide
+# Arweave Deploy User Guide
 
 {% hint style="warning" %}
 **For any questions and support queries regarding Arweave Deploy, we strongly recommend that you join our** [**Discord server**](https://discord.gg/DjAFMJc) **as this is the hub of our developer community. Here you will find plenty of community devs and Arweave team members available to help you out** 🤖 
