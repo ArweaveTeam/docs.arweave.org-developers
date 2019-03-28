@@ -86,13 +86,13 @@ To avoid having external dependencies we can package our HTML and external asset
 
 Under the hood your page will be processed using this [inline-source](https://www.npmjs.com/package/inline-source) NPM package, it's a common tool used in gulp and webpack workflows.
 
-[Read more about packaging](docs/packaging.md), why it's useful and how it works, with examples.
+[Read more about packaging](arweave-deploy/html-packaging), why it's useful and how it works, with examples.
 
 ```text
 arweave deploy path-to/index.html --package
 ```
 
-For you can use the package command to process the file without deploying it, this is useful for testing or debugging.
+Or you can use the package command to process the file without deploying it, this is useful for testing or debugging.
 
 ```text
 arweave package path-to/index.html output/packaged.html
