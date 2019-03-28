@@ -7,7 +7,7 @@ description: >-
 # Arweave Deploy User Guide
 
 {% hint style="warning" %}
-**For any questions and support queries regarding Arweave Deploy, we strongly recommend that you join our** [**Discord server**](https://discord.gg/DjAFMJc) **as this is the hub of our developer community. Here you will find plenty of community devs and Arweave team members available to help you out** 🤖 
+**For any questions and support queries regarding Arweave Deploy, we strongly recommend that you join our** [**Discord server**](https://discord.gg/DjAFMJc) **as this is the hub of our developer community. Here you will find plenty of community devs and Arweave team members available to help you out** 🤖
 {% endhint %}
 
 ## Installation
@@ -86,7 +86,7 @@ To avoid having external dependencies we can package our HTML and external asset
 
 Under the hood your page will be processed using this [inline-source](https://www.npmjs.com/package/inline-source) NPM package, it's a common tool used in gulp and webpack workflows.
 
-[Read more about packaging](arweave-deploy/html-packaging), why it's useful and how it works, with examples.
+[Read more about packaging](html-packaging.md), why it's useful and how it works, with examples.
 
 ```text
 arweave deploy path-to/index.html --package
