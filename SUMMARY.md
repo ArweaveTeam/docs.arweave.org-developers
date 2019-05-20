@@ -2,16 +2,16 @@
 
 * [Getting Started](README.md)
 * [Mining Docs](https://docs.arweave.org)
-* [Arweave Deploy User Guide](arweave-deploy-1/README.md)
-  * [HTML Packaging](arweave-deploy-1/html-packaging.md)
 
 ## Arweave Node Server
 
-* [HTTP API](arweave-node-server/http-api.md)
+* [HTTP API](server/http-api.md)
 
 ## Arweave Deploy
 
-* [License](arweave-deploy/license.md)
+* [Arweave Deploy User Guide](tools/arweave-deploy/README.md)
+  * [HTML Packaging](tools/arweave-deploy/html-packaging.md)
+* [License](tools/license.md)
 
 ## Libraries/SDKs
 
