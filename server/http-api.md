@@ -831,7 +831,7 @@ Transaction verification failed.
 
 ## Wallets
 
-Endpoints for getting information about a wallets.
+Endpoints for getting information about a wallet.
 
 {% api-method method="get" host="http://arweave.net:1984" path="/wallet/{address}/balance" %}
 {% api-method-summary %}
@@ -839,7 +839,7 @@ Get a Wallet Balance
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get the ballance for a given wallet. Unknown wallet addresses will simply return 0.
+Get the balance for a given wallet. Unknown wallet addresses will simply return 0.
 {% endapi-method-description %}
 
 {% api-method-spec %}
