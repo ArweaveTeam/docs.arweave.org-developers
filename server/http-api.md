@@ -174,8 +174,8 @@ See the [sample transactions](http-api.md#sample-transactions) below for full ex
       <td style="text-align:left"><code>id</code>
       </td>
       <td style="text-align:left">Yes</td>
-      <td style="text-align:left">The transaction ID is derrived from the Base64 URL encoding of a SHA-256
-        hash of the Base64 decoded <a href="http-api.md#transaction-signing">transaction signature</a>.</td>
+      <td style="text-align:left">The transaction ID is derived from the Base64 URL encoding of a SHA-256
+        hash of the base64 decoded <a href="http-api.md#transaction-signing">transaction signature</a>.</td>
     </tr>
     <tr>
       <td style="text-align:left"><code>last_tx</code>
@@ -235,7 +235,7 @@ See the [sample transactions](http-api.md#sample-transactions) below for full ex
       <td style="text-align:left"><code>signature</code>
       </td>
       <td style="text-align:left">Yes</td>
-      <td style="text-align:left">The transaction signature is derrived from concatenating the transaction
+      <td style="text-align:left">The transaction signature is derived from concatenating the transaction
         data then signing it, the signature should then be Base64 URL encoded.
         See <a href="http-api.md#transaction-signing">Transaction Signing</a> for
         more.</td>
@@ -247,15 +247,15 @@ See the [sample transactions](http-api.md#sample-transactions) below for full ex
 
 **1. Data Transaction**
 
-This is the most common transaction format used to store a piece data on the network. The data should should be base64 URL encoded and go in the `data` field. The `target` and `quantity` fields should be set to empty strings as they are not needed.
+This is the most common transaction format used to store a piece of data on the network. The data should should be Base64 URL encoded and go in the `data` field. The `target` and `quantity` fields should be set to empty strings as they are not needed.
 
 **2. Wallet to Wallet AR Transfer**
 
 This type of transaction is used to move AR from one wallet to another. The `data` field should be set to an empty string as it it not needed.
 
-**3. Wallet to Wallet AR transfer with Data**
+**3. Wallet to Wallet AR Transfer with Data**
 
-This type of transaction is for transferring AR with a piece of data attached, this is useful for attaching a message or some other piece of data to a transaction sent to another wallet, for example a reference number or identifier to help account for the transaction. The `data`, `target`, and `quantity` fields should all be used for this type of tranasaction.
+This type of transaction is for transferring AR with a piece of data attached, this is useful for attaching a message or some other piece of data to a transaction sent to another wallet, for example a reference number or identifier to help account for the transaction. The `data`, `target`, and `quantity` fields should all be used for this type of transaction.
 
 
 
@@ -380,7 +380,7 @@ Arweave uses the JSON Web Key \(JWK\) format \([RFC 7517](https://tools.ietf.org
 
 It's widely supported with libraries for most popular languages. It's possible to convert a JWK to a PEM file or other crypto key file format, support for this this will vary from language to language.
 
-If you're generating your own keys manually **the public exponent \(e\) must be 65537**. If any other value is used then transactions signed by these keys will be invalid and rejected.
+If you're generating your own keys manually **the public exponent \(e\) must be 65537**. If any other value is used the transactions signed by these keys will be invalid and rejected.
 
 #### Addressing
 
@@ -406,7 +406,7 @@ The address for this wallet is `GRQ7swQO1AMyFgnuAPI7AvGQlW3lzuQuwlJbIpWV7xk`.
 
 ### AR and Winston
 
-Winston is the smallest possible unit of AR, similar to a [satoshi](https://en.bitcoin.it/wiki/Satoshi_%28unit%29) in Bitcoin, or [wei](http://ethdocs.org/en/latest/ether.html#denominations) in Etherium.
+Winston is the smallest possible unit of AR, similar to a [satoshi](https://en.bitcoin.it/wiki/Satoshi_%28unit%29) in Bitcoin, or [wei](http://ethdocs.org/en/latest/ether.html#denominations) in Ethereum.
 
 **1 AR** = 1000000000000 Winston \(12 zeros\) and **1 Winston** = 0.000000000001 AR.
 
@@ -580,7 +580,7 @@ Get Transaction Data
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get the raw base64 decoded data from a transaction.  
+Get the raw Base64 decoded data from a transaction.  
   
   
 The `Content-Type` will default to `text/html` so this endpoint will return a browser renderable response by default.
@@ -758,7 +758,7 @@ The amount in winston to transfer to the `target` wallet. **Use an empty string 
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="data" type="string" required=true %}
-The data to be uploaded, base64 URL encoded. **Use an empty string if not required.**
+The data to be uploaded, Base64 URL encoded. **Use an empty string if not required.**
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="reward" type="string" required=true %}
@@ -766,7 +766,7 @@ The transaction fee.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="signature" type="string" required=true %}
-The transaction signature, base64 URL encoded.
+The transaction signature, Base64 URL encoded.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -826,7 +826,7 @@ Transaction verification failed.
 {% endapi-method %}
 
 {% hint style="info" %}
-**Find more information** about these fields and examples in the [transaction format](http-api.md#transaction-format) section.
+**Find more information** about these fields and examples in the [Transaction Format](http-api.md#transaction-format) section.
 {% endhint %}
 
 ## Wallets
@@ -1053,7 +1053,7 @@ Peer list
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get the list of peers that the node. Nodes can only respond with peers they currently know about, so this will not be an exhaustive or complete list of nodes on the network.
+Get the list of peers from the node. Nodes can only respond with peers they currently know about, so this will not be an exhaustive or complete list of nodes on the network.
 {% endapi-method-description %}
 
 {% api-method-spec %}

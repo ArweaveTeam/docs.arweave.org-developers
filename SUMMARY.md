@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Getting Started](README.md)
+* [Hackathon info sheet](untitled.md)
 * [Mining Docs](https://docs.arweave.org)
 
 ## Arweave Node Server
