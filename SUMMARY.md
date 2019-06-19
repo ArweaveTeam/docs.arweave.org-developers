@@ -1,14 +1,14 @@
 # Table of contents
 
 * [Getting Started](README.md)
-* [Hackathon info sheet](untitled.md)
+* [Hackathon info sheet](hackathon.md)
 * [Mining Docs](https://docs.arweave.org)
 
-## Arweave Node Server
+## Arweave Node Server <a id="server"></a>
 
 * [HTTP API](server/http-api.md)
 
-## Arweave Deploy
+## Arweave Deploy <a id="tools"></a>
 
 * [Arweave Deploy User Guide](tools/arweave-deploy/README.md)
   * [HTML Packaging](tools/arweave-deploy/html-packaging.md)

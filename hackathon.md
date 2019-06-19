@@ -2,8 +2,10 @@
 
 The Arweave network itself is a global, permanent hard drive, while the permaweb is a decentralised, immutable web built on top of the Arweave.
 
-Permaweb apps are built using normal web technologies — HTML, CSS, and Javascript — but are deployed to Arweave’s on-chain storage system, making them permanent and available in a fast, decentralised manner. You can deploy a permaweb app in 2 minutes or less!  
+Permaweb apps are built using normal web technologies — HTML, CSS, and Javascript — but are deployed to Arweave’s on-chain storage system, making them permanent and available in a fast, decentralised manner. You can deploy a permaweb app in 2 minutes or less with Arweave Deploy!  
 
+
+\*\*\*\*[**Get a free wallet with 1 AR to try it out**](http://tokens.arweave.org)**.**
 
 ## **Introduction & background:**
 
@@ -15,12 +17,13 @@ Permaweb apps are built using normal web technologies — HTML, CSS, and Javascr
 
 * \*\*\*\*[**Developer documentation**](%20https://docs.arweave.org/developers/) ****
 * [**HTTP API docs** ](https://docs.arweave.org/developers/server/http-api)
-* \*\*\*\*[**Arweave Deploy user guide** ](https://docs.arweave.org/developers/tools/arweave-deploy)\*\*\*\*
-* [**Existing permaweb apps** ](http://arweaveapps.com)\*\*\*\*
-
+* [**Arweave Deploy**](https://github.com/ArweaveTeam/arweave-deploy)\*\*\*\*
+* \*\*\*\*[**Arweave JS**](https://github.com/ArweaveTeam/arweave-js)\*\*\*\*
+* \*\*\*\*[**Existing permaweb apps**](http://arweaveapps.com)
+* 
 ## **Community:**
 
-* [**Discord**](https://discordapp.com/invite/DjAFMJc)\*\*\*\*
+* [**Discord**](https://discordapp.com/invite/DjAFMJc)
 * [**Telegram**](https://t.me/arweave)\*\*\*\*
 * [**Github**](https://github.com/arweaveteam)\*\*\*\*
 * [**Reddit**](https://www.reddit.com/r/Arweave/)\*\*\*\*
