@@ -20,7 +20,8 @@ Permaweb apps are built using normal web technologies — HTML, CSS, and Javascr
 * [**Arweave Deploy**](https://github.com/ArweaveTeam/arweave-deploy)\*\*\*\*
 * \*\*\*\*[**Arweave JS**](https://github.com/ArweaveTeam/arweave-js)\*\*\*\*
 * \*\*\*\*[**Existing permaweb apps**](http://arweaveapps.com)
-* 
+* [**Block explorer**](http://viewblock.io/arweave)\*\*\*\*
+
 ## **Community:**
 
 * [**Discord**](https://discordapp.com/invite/DjAFMJc)
