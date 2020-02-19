@@ -12,7 +12,7 @@ The default port is **1984**.
 
 Requests and queries can be sent to any Arweave node directly using their IP address, for example [http://159.65.213.43:1984/info](http://159.65.213.43:1984/info).
 
-Hostnames can also be used if configured with DNS, for example [http://arweave.net:1984/info](http://arweave.net:1984/info).
+Hostnames can also be used if configured with DNS, for example [https://arweave.net/info](https://arweave.net/info).
 
 #### Sample Request
 
@@ -20,7 +20,7 @@ Hostnames can also be used if configured with DNS, for example [http://arweave.n
 {% tab title="cURL" %}
 ```bash
 curl --request GET \
-  --url 'http://arweave.net:1984/info'
+  --url 'https://arweave.net/info'
 ```
 {% endtab %}
 
@@ -418,7 +418,7 @@ JavaScript for example stores all numbers as double precision floating point val
 
 Endpoints for interacting with transactions and related resources.
 
-{% api-method method="get" host="http://arweave.net:1984" path="/tx/{id}" %}
+{% api-method method="get" host="https://arweave.net" path="/tx/{id}" %}
 {% api-method-summary %}
 Get Transaction by ID
 {% endapi-method-summary %}
@@ -502,7 +502,7 @@ The **quantity** and **reward** values are always represented as winston strings
 
 See the [Transaction Format](http-api.md#transaction-format) section for details about transaction structure and contents, with examples.
 
-{% api-method method="get" host="http://arweave.net:1984" path="/tx/{id}/{field}" %}
+{% api-method method="get" host="https://arweave.net" path="/tx/{id}/{field}" %}
 {% api-method-summary %}
 Get Transaction Field
 {% endapi-method-summary %}
@@ -574,7 +574,7 @@ Not Found.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="http://arweave.net:1984" path="/tx/{id}/data.{extension}" %}
+{% api-method method="get" host="https://arweave.net" path="/tx/{id}/data.{extension}" %}
 {% api-method-summary %}
 Get Transaction Data
 {% endapi-method-summary %}
@@ -652,7 +652,7 @@ A **Content-Type** tag can be submitted with a transaction, the tag will then be
 The default Content-Type is **text/html**.
 {% endhint %}
 
-{% api-method method="get" host="http://arweave.net:1984" path="price/{bytes}/{target}" %}
+{% api-method method="get" host="https://arweave.net" path="price/{bytes}/{target}" %}
 {% api-method-summary %}
 Get Transaction Price
 {% endapi-method-summary %}
@@ -711,7 +711,7 @@ If sending a data transaction with 123 bytes we would use `/price/123`.
 
 If sending 10 AR to another wallet with a data segment of  123 bytes we would use `/price/123/abc`.
 
-{% api-method method="post" host="http://arweave.net:1984" path="/tx" %}
+{% api-method method="post" host="https://arweave.net" path="/tx" %}
 {% api-method-summary %}
 Submit a Transaction
 {% endapi-method-summary %}
@@ -833,7 +833,7 @@ Transaction verification failed.
 
 Endpoints for getting information about a wallet.
 
-{% api-method method="get" host="http://arweave.net:1984" path="/wallet/{address}/balance" %}
+{% api-method method="get" host="https://arweave.net" path="/wallet/{address}/balance" %}
 {% api-method-summary %}
 Get a Wallet Balance
 {% endapi-method-summary %}
@@ -879,7 +879,7 @@ Invalid address.
 Wallet balances are always represented as winston strings. [**What and why?**](http-api.md#winston-and-ar)\*\*\*\*
 {% endhint %}
 
-{% api-method method="get" host="http://arweave.net:1984" path="/wallet/{address}/last\_tx" %}
+{% api-method method="get" host="https://arweave.net" path="/wallet/{address}/last\_tx" %}
 {% api-method-summary %}
 Get Last Transaction ID
 {% endapi-method-summary %}
@@ -925,7 +925,7 @@ Invalid address.
 
 Endpoints for getting blocks and block data.
 
-{% api-method method="get" host="http://arweave.net:1984" path="block/hash/{block\_hash}" %}
+{% api-method method="get" host="https://arweave.net" path="block/hash/{block\_hash}" %}
 {% api-method-summary %}
 Get Block by ID
 {% endapi-method-summary %}
@@ -1005,7 +1005,7 @@ See the [Block Format](http-api.md#block-format) section for details about the b
 
 Endpoints for getting information about the current network and node state.
 
-{% api-method method="get" host="http://arweave.net:1984" path="/info" %}
+{% api-method method="get" host="https://arweave.net" path="/info" %}
 {% api-method-summary %}
 Network Info
 {% endapi-method-summary %}
@@ -1047,7 +1047,7 @@ application/json
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="http://arweave.net:1984" path="/peers" %}
+{% api-method method="get" host="https://arweave.net" path="/peers" %}
 {% api-method-summary %}
 Peer list
 {% endapi-method-summary %}
