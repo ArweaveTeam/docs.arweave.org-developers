@@ -26,7 +26,7 @@ curl --request GET \
 
 {% tab title="JavaScript \(Fetch\)" %}
 ```javascript
-fetch('http://arweave.net:1984/info')
+fetch('https://arweave.net/info')
 .then( response => {
   console.log('Arweave network height is: ' + response.json().height);
 })
@@ -42,7 +42,7 @@ let request = require("request");
 
 let options = {
  method: 'GET',
- url: 'http://arweave.net:1984/info'
+ url: 'https://arweave.net/info'
 };
 
 request(options, function (error, response, body) { 
