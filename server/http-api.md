@@ -652,7 +652,7 @@ A **Content-Type** tag can be submitted with a transaction, the tag will then be
 The default Content-Type is **text/html**.
 {% endhint %}
 
-{% api-method method="get" host="https://arweave.net" path="price/{bytes}/{target}" %}
+{% api-method method="get" host="https://arweave.net" path="/price/{bytes}/{target}" %}
 {% api-method-summary %}
 Get Transaction Price
 {% endapi-method-summary %}
