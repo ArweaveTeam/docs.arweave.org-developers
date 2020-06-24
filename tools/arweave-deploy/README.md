@@ -63,7 +63,7 @@ arweave deploy path-to-my/index.html --package
 
 ### Deploy a file
 
-If you're deploying HTML pages and have have external resources referenced, like style sheets, JavaScript, or images, then use the packaged HTML workflow.
+If you're deploying HTML pages and have have external resources referenced, like style sheets, JavaScript, or images, then use the directory deploy workflow.
 
 ```text
 arweave deploy path-to-my/file.txt
@@ -96,6 +96,46 @@ For you can use the package command to process the file without deploying it, th
 
 ```text
 arweave package path-to/index.html output/packaged.html
+```
+
+### Deploy a directory
+If you're deploying an Arweave application this is the recommended method to do so as each asset will be uploaded independently so there is no need for packaging and asset inlining.
+
+```text
+arweave deploy-dir path-to/directory/to-deploy
+```
+
+```text
+Preparing files from /Users/test/path-to/directory/to-deploy
+ID                                          Size         Fee             Type                 Path
+B65fe71tENkmgmndJQTvLZqVqg4lUsdcmCFudw_uzBk 4.59 kB      0.000019762690  image/png            favicon/source.png
+RBg1ysAnKmlnU8YROY2g2KVbE3d6rgobVV4qzss2Isk 3.55 kB      0.000017101174  image/png            images/logo-node.png
+648-XB1Tf2KDPJUyzMf1Zf1FmWi0F103WMtZydQvhZ8 18.89 kB     0.000056359156  text/html            open-web-hackathon.html
+Kws1-Lr-z4tTGzrqfJQv9Biko_lrBPAr90H2xW_oXtg 22.24 kB     0.000064933485  text/html            technology.html
+w243l_eiYxwS_JPotydO2VVi1uCpYga1CZjWAHuahDU 24.78 kB     0.000071428584  image/svg+xml        images/8.svg
+9HG223hRM46RczvRidgxj1tF5GtoTprL2ItGKXew9Ac 32.27 kB     0.000090591496  image/svg+xml        images/7.svg
+J1CgVMmA0P7YxxynjuWW3J6e5S-Qp6O9Smu8I0nCGSA 22.65 kB     0.000065978098  text/html            hosting.html
+aUJYq1gUTOenMHwlkQWj3YNSiul5O8j0G8lWXlHdx7I 22.79 kB     0.000066350461  image/svg+xml        images/hosting-1.svg
+boN6C7ntD_yi-IGbkBqc0KXr0fz7SGoFLSZ2OKxJYRE 49.53 kB     0.000134780154  text/css             player/player.css
+Eaa4CWHk1KD5QhHAUAjW5zV30391P60mhpHWcMgPGBU 36.59 kB     0.000101662402  text/html            index.html*
+kFoajp8jQ1NUS7Rc7AaxwIMXViAdOYPfNQZjZkMlPEU 6.04 kB      0.000023471318  application/x.arweave-manifest+json
+Summary
+Index: index.html
+Number of files: 78 + 1 manifest
+Total size: 7.91 MB
+Total price: 0.021388749854 AR
+Wallet
+Address: MDlauADgN7AoVQl4Eqmwr3xHXyKXMqADaiCas3mEyNQ
+Current balance: 48.855183859428 AR
+Balance after uploading: 48.833795109574 AR
+Carefully check the above details are correct, then Type CONFIRM to complete this upload 
+```
+```
+Uploading...
+████████████████████████████████████████ 79/79 100% | 1m49s
+Your files are being deployed! 🚀
+Once your files are mined into blocks they'll be available on the following URL
+https://arweave.net/kFoajp8jQ1NUS7Rc7AaxwIMXViAdOYPfNQZjZkMlPEU
 ```
 
 ### Check a deployment status
