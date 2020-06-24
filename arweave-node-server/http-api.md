@@ -174,7 +174,7 @@ See the [sample transactions](http-api.md#sample-transactions) below for full ex
       <td style="text-align:left"><code>id</code>
       </td>
       <td style="text-align:left">Yes</td>
-      <td style="text-align:left">The transaction ID is derrived from the Base64 URL encoding of a SHA-256
+      <td style="text-align:left">The transaction ID is derived from the Base64 URL encoding of a SHA-256
         hash of the Base64 decoded <a href="http-api.md#transaction-signing">transaction signature</a>.</td>
     </tr>
     <tr>
@@ -235,7 +235,7 @@ See the [sample transactions](http-api.md#sample-transactions) below for full ex
       <td style="text-align:left"><code>signature</code>
       </td>
       <td style="text-align:left">Yes</td>
-      <td style="text-align:left">The transaction signature is derrived from concatenating the transaction
+      <td style="text-align:left">The transaction signature is derived from concatenating the transaction
         data then signing it, the signature should then be Base64 URL encoded.
         See <a href="http-api.md#transaction-signing">Transaction Signing</a> for
         more.</td>
@@ -247,7 +247,7 @@ See the [sample transactions](http-api.md#sample-transactions) below for full ex
 
 **1. Data Transaction**
 
-This is the most common transaction format used to store a piece data on the network. The data should should be base64 URL encoded and go in the `data` field. The `target` and `quantity` fields should be set to empty strings as they are not needed.
+This is the most common transaction format used to store a piece data on the network. The data should be base64 URL encoded and go in the `data` field. The `target` and `quantity` fields should be set to empty strings as they are not needed.
 
 **2. Wallet to Wallet AR Transfer**
 
@@ -255,7 +255,7 @@ This type of transaction is used to move AR from one wallet to another. The `dat
 
 **3. Wallet to Wallet AR transfer with Data**
 
-This type of transaction is for transferring AR with a piece of data attached, this is useful for attaching a message or some other piece of data to a transaction sent to another wallet, for example a reference number or identifier to help account for the transaction. The `data`, `target`, and `quantity` fields should all be used for this type of tranasaction.
+This type of transaction is for transferring AR with a piece of data attached, this is useful for attaching a message or some other piece of data to a transaction sent to another wallet, for example a reference number or identifier to help account for the transaction. The `data`, `target`, and `quantity` fields should all be used for this type of transaction.
 
 
 
@@ -406,7 +406,7 @@ The address for this wallet is `GRQ7swQO1AMyFgnuAPI7AvGQlW3lzuQuwlJbIpWV7xk`.
 
 ### AR and Winston
 
-Winston is the smallest possible unit of AR, similar to a [satoshi](https://en.bitcoin.it/wiki/Satoshi_%28unit%29) in Bitcoin, or [wei](http://ethdocs.org/en/latest/ether.html#denominations) in Etherium.
+Winston is the smallest possible unit of AR, similar to a [satoshi](https://en.bitcoin.it/wiki/Satoshi_%28unit%29) in Bitcoin, or [wei](http://ethdocs.org/en/latest/ether.html#denominations) in Ethereum.
 
 **1 AR** = 1000000000000 Winston \(12 zeros\) and **1 Winston** = 0.000000000001 AR.
 
@@ -652,7 +652,7 @@ A **Content-Type** tag can be submitted with a transaction, the tag will then be
 The default Content-Type is **text/html**.
 {% endhint %}
 
-{% api-method method="get" host="http://arweave.net:1984" path="price/{bytes}/{target}" %}
+{% api-method method="get" host="http://arweave.net:1984" path="/price/{bytes}/{target}" %}
 {% api-method-summary %}
 Get Transaction Price
 {% endapi-method-summary %}
@@ -794,7 +794,7 @@ Transaction already processed.
 
 {% api-method-response-example httpCode=400 %}
 {% api-method-response-example-description %}
-The transaction is invalid, couldn't be verified, or the wallet does not have suffucuent funds.
+The transaction is invalid, couldn't be verified, or the wallet does not have sufficient funds.
 {% endapi-method-response-example-description %}
 
 ```
@@ -900,7 +900,7 @@ Wallet address.
 {% api-method-response %}
 {% api-method-response-example httpCode=200 %}
 {% api-method-response-example-description %}
-The last transaction ID a sa string.
+The last transaction ID as a string.
 {% endapi-method-response-example-description %}
 
 ```
@@ -925,7 +925,7 @@ Invalid address.
 
 Endpoints for getting blocks and block data.
 
-{% api-method method="get" host="http://arweave.net:1984" path="block/hash/{block\_hash}" %}
+{% api-method method="get" host="http://arweave.net:1984" path="/block/hash/{block\_hash}" %}
 {% api-method-summary %}
 Get Block by ID
 {% endapi-method-summary %}
