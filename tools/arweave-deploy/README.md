@@ -7,7 +7,7 @@ description: >-
 # Arweave Deploy User Guide
 
 {% hint style="warning" %}
-**For any questions and support queries regarding Arweave Deploy, we strongly recommend that you join our** [**Discord server**](https://discord.gg/DjAFMJc) **as this is the hub of our developer community. Here you will find plenty of community devs and Arweave team members available to help you out** 🤖 
+**For any questions and support queries regarding Arweave Deploy, we strongly recommend that you join our** [**Discord server**](https://discord.gg/DjAFMJc) **as this is the hub of our developer community. Here you will find plenty of community devs and Arweave team members available to help you out** 🤖
 {% endhint %}
 
 ## Installation
@@ -86,7 +86,7 @@ To avoid having external dependencies we can package our HTML and external asset
 
 Under the hood your page will be processed using this [inline-source](https://www.npmjs.com/package/inline-source) NPM package, it's a common tool used in gulp and webpack workflows.
 
-[Read more about packaging](docs/packaging.md), why it's useful and how it works, with examples.
+[Read more about packaging](https://github.com/ArweaveTeam/docs.arweave.org-developers/tree/f45de7683c0a623e13e4155db32c6ce507c92d74/tools/arweave-deploy/docs/packaging.md), why it's useful and how it works, with examples.
 
 ```text
 arweave deploy path-to/index.html --package
@@ -99,6 +99,7 @@ arweave package path-to/index.html output/packaged.html
 ```
 
 ### Deploy a directory
+
 If you're deploying an Arweave application this is the recommended method to do so as each asset will be uploaded independently so there is no need for packaging and asset inlining.
 
 ```text
@@ -128,9 +129,10 @@ Wallet
 Address: MDlauADgN7AoVQl4Eqmwr3xHXyKXMqADaiCas3mEyNQ
 Current balance: 48.855183859428 AR
 Balance after uploading: 48.833795109574 AR
-Carefully check the above details are correct, then Type CONFIRM to complete this upload 
+Carefully check the above details are correct, then Type CONFIRM to complete this upload
 ```
-```
+
+```text
 Uploading...
 ████████████████████████████████████████ 79/79 100% | 1m49s
 Your files are being deployed! 🚀
