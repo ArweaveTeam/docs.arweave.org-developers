@@ -22,7 +22,7 @@ npm install -g arweave-deploy
 npm update -g arweave-deploy
 ```
 
-RSA key generation requires Node v10.12.0 so some features may be unavailable. If you're running an earlier versoin of node or don't want node installed at all, the precompiled binaries below come bundled with the correct version.
+RSA key generation requires Node v10.12.0+ so some features may be unavailable. If you're running an earlier version of node or don't want node installed at all, the precompiled binaries below come bundled with the correct version.
 
 ### Manual
 
@@ -63,7 +63,7 @@ arweave deploy path-to-my/index.html --package
 
 ### Deploy a file
 
-If you're deploying HTML pages and have have external resources referenced, like style sheets, JavaScript, or images, then use the directory deploy workflow.
+If you're deploying HTML pages and have external resources referenced, like style sheets, JavaScript, or images, then use the directory deploy workflow.
 
 ```text
 arweave deploy path-to-my/file.txt
