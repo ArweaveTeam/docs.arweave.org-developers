@@ -2,7 +2,7 @@
 
 ### The problem
 
-Conside this example from [/sample/original/index.html](/sample/original/index.html)
+Consider this example
 
 ```markup
 <!-- /sample/original/index.html -->
