@@ -19,5 +19,5 @@
 * [Go](https://github.com/Dev43/arweave-go)
 * [PHP](https://github.com/ArweaveTeam/arweave-php)
 * [Scala](https://github.com/toknapp/arweave4s)
-* [JavsScript/TypeScript/NodeJS](https://github.com/ArweaveTeam/arweave-js)
+* [JavaScript/TypeScript/NodeJS](https://github.com/ArweaveTeam/arweave-js)
 
