@@ -22,11 +22,11 @@ npm install -g arweave-deploy
 npm update -g arweave-deploy
 ```
 
-RSA key generation requires Node v10.12.0 so some features may be unavailable. If you're running an earlier versoin of node or don't want node installed at all, the precompiled binaries below come bundled with the correct version.
+RSA key generation requires Node v10.12.0, so some features may be unavailable. If you're running an earlier version of Node, or don't want Node installed at all, the precompiled binaries below come bundled with the correct version.
 
 ### Manual
 
-These binaries are around 30MB each as they come with a self-contained, bundled version of node.
+These binaries are around 30MB each as they come with a self-contained, bundled version of Node.
 
 * [linux](https://github.com/ArweaveTeam/arweave-deploy/raw/latest/dist/linux/arweave)
 * [macos](https://github.com/ArweaveTeam/arweave-deploy/raw/latest/dist/macos/arweave)
@@ -41,19 +41,19 @@ Deploy a file
 arweave deploy path-to-my/file.txt --key-file path/to/arweave-key.json
 ```
 
-Deploy a HTML file
+Deploy an HTML file
 
 ```text
 arweave deploy path-to-my/index.html --key-file path/to/arweave-key.json --package
 ```
 
-Save your keyfile
+Save your key file
 
 ```text
 arweave key-save path/to/arweave-key.json
 ```
 
-After saving your key you can now run commands without the `--key-file` option, like this
+After saving your key, you can now run commands without the `--key-file` option, like this:
 
 ```text
 arweave deploy path-to-my/index.html --package
@@ -63,28 +63,28 @@ arweave deploy path-to-my/index.html --package
 
 ### Deploy a file
 
-If you're deploying HTML pages and have have external resources referenced, like style sheets, JavaScript, or images, then use the directory deploy workflow.
+If you're deploying HTML pages and have external resources referenced, like style sheets, JavaScript, or images, use the directory deploy workflow.
 
 ```text
 arweave deploy path-to-my/file.txt
 ```
 
-Once confirmed you'll see a transaction ID and URL
+Once confirmed, you'll see a transaction ID and URL:
 
 ```text
 Your file is deploying! 🚀,
-Once your file is mined into a block it'll be available on the following URL,
+Once your file is mined into a block, it'll be available on the following URL,
 
 https://arweave.net/3T261RAQIj2DQmOk1t_zPQnoxVbh5qtMA1-NdzOHKKE
 
-You can check it's status using 'arweave status 3T261RAQIj2DQmOk1t_zPQnoxVbh5qtMA1-NdzOHKKE'
+You can check its status using 'arweave status 3T261RAQIj2DQmOk1t_zPQnoxVbh5qtMA1-NdzOHKKE'
 ```
 
 ### Deploy a packaged HTML file
 
-To avoid having external dependencies we can package our HTML and external assets into a single self-contained file. Just add the `--package` flag to the deploy command.
+To avoid having external dependencies, we can package our HTML and external assets into a single self-contained file. Just add the `--package` flag to the deploy command.
 
-Under the hood your page will be processed using this [inline-source](https://www.npmjs.com/package/inline-source) NPM package, it's a common tool used in gulp and webpack workflows.
+Under the hood, your page will be processed using this [inline-source](https://www.npmjs.com/package/inline-source) NPM package. It's a common tool used in Gulp and Webpack workflows.
 
 [Read more about packaging](https://github.com/ArweaveTeam/docs.arweave.org-developers/tree/f45de7683c0a623e13e4155db32c6ce507c92d74/tools/arweave-deploy/docs/packaging.md), why it's useful and how it works, with examples.
 
@@ -92,7 +92,7 @@ Under the hood your page will be processed using this [inline-source](https://ww
 arweave deploy path-to/index.html --package
 ```
 
-For you can use the package command to process the file without deploying it, this is useful for testing or debugging.
+You can use the package command to process the file without deploying it, which is useful for testing or debugging.
 
 ```text
 arweave package path-to/index.html output/packaged.html
@@ -100,7 +100,7 @@ arweave package path-to/index.html output/packaged.html
 
 ### Deploy a directory
 
-If you're deploying an Arweave application this is the recommended method to do so as each asset will be uploaded independently so there is no need for packaging and asset inlining.
+If you're deploying an Arweave application, this is the recommended method to do so. Each asset will be uploaded independently, so there is no need for packaging and asset inlining.
 
 ```text
 arweave deploy-dir path-to/directory/to-deploy
@@ -136,7 +136,7 @@ Carefully check the above details are correct, then Type CONFIRM to complete thi
 Uploading...
 ████████████████████████████████████████ 79/79 100% | 1m49s
 Your files are being deployed! 🚀
-Once your files are mined into blocks they'll be available on the following URL
+Once your files are mined into blocks, they'll be available on the following URL
 https://arweave.net/kFoajp8jQ1NUS7Rc7AaxwIMXViAdOYPfNQZjZkMlPEU
 ```
 
@@ -147,7 +147,7 @@ arweave status YOUR_TRANSACTION_ID
 ```
 
 ```text
-Trasaction ID: 3T261RAQIj2DQmOk1t_zPQnoxVbh5qtMA1-NdzOHKKE
+Transaction ID: 3T261RAQIj2DQmOk1t_zPQnoxVbh5qtMA1-NdzOHKKE
 
 Status: 200 Accepted
 
@@ -161,9 +161,9 @@ Block URL: https://arweave.net/block/hash/fMq_zmps-jgEAOC4Gi2s8ewAhgl31TzrOK8lSP
 Block explorer URL: https://viewblock.io/arweave/block/144339
 ```
 
-### Load your keyfile
+### Load your key file
 
-The easiest way to use deploy is to load your keyfile first, then you can simply run deploy commands without having to pass your key each time.
+The easiest way to use deploy is to load your key file first, then run deploy commands without having to pass your key each time.
 
 ```text
 arweave key-save path/to/arweave-key.json
@@ -176,23 +176,23 @@ Confirm your encryption passphrase
 Successfully saved keyfile for wallet: 5rqCZeIG9flWzndFTXzqtGBdLahYDsn7BrfRE2Vbu6w
 ```
 
-Your keyfile will be encrypted using the passphrase that you provide, and will be stored in `~/.arweave-deploy/key.json`.
+Your key file will be encrypted using the passphrase that you provide and will be stored in `~/.arweave-deploy/key.json`.
 
-**Why do I need a keyfile?**
+**Why do I need a key file?**
 
-Arweave is a blockchain-like network, so each data upload \(transaction\) needs signing with a valid Arweave keyfile.
+Arweave is a blockchain-like network, so each data upload \(transaction\) needs signing with a valid Arweave key file.
 
-**I don't have an Arweave keyfile or tokens?**
+**I don't have an Arweave key file or tokens?**
 
-If you don't have any Arweave tokens [you can get some free to try this out](https://tokens.arweave.org).
+If you don't have any Arweave tokens [you can get some free here](https://tokens.arweave.org).
 
-**I already have an Arweave wallet, how do I get the keyfile?**
+**I already have an Arweave wallet. How do I get the key file?**
 
-You can use the same keyfiles as the Arweave [Chrome Extension Wallet](https://chrome.google.com/webstore/detail/arweave/iplppiggblloelhoglpmkmbinggcaaoc?hl=en-GB), go to Wallets &gt; Select a wallet &gt; Select 'Export Key' to download the json keyfile.
+You can use the same key files as the Arweave [Chrome Extension Wallet](https://chrome.google.com/webstore/detail/arweave/iplppiggblloelhoglpmkmbinggcaaoc?hl=en-GB), go to Wallets &gt; Select a wallet &gt; Select 'Export Key' to download the JSON key file.
 
-### Generate a keyfile
+### Generate a key file
 
-If you want to generate a new keyfile you can do so using this command. This is useful if you don't want uploads to show from the same wallet address, or if you simply want to have a secondary wallet just used for deploying data.
+If you want to generate a new key file, you can do so using this command. This is useful if you don't want uploads to show from the same wallet address or want to have a secondary wallet just used to deploy data.
 
 ```text
 arweave key-create new-arweave-key.json
@@ -204,11 +204,11 @@ Your new wallet address: 5rqCZeIG9flWzndFTXzqtGBdLahYDsn7BrfRE2Vbu6w
 Successfully saved key to new-arweave-key.json
 ```
 
-You need to transfer funds to your new wallet address before you can use the keyfile for deployments. You can use the [Chrome Extension Wallet](https://chrome.google.com/webstore/detail/arweave/iplppiggblloelhoglpmkmbinggcaaoc?hl=en-GB) for transacting AR between wallets.
+You need to transfer funds to your new wallet address before using the key file for deployments. You can use the [Chrome Extension Wallet](https://chrome.google.com/webstore/detail/arweave/iplppiggblloelhoglpmkmbinggcaaoc?hl=en-GB) for transacting AR between wallets.
 
-### Remove your keyfile
+### Remove your key file
 
-To remove your saved keyfile simply run this command. After this you'll either need to save a new key or use the `--key-file` option when using deploy.
+To remove your saved key file, simply run this command. After this, you'll either need to save a new key or use the `--key-file` option when using deploy.
 
 ```text
 arweave key-forget
