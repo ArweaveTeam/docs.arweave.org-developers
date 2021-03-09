@@ -374,6 +374,61 @@ The **quantity** and **reward** values are always represented as winston strings
 
 See the [Transaction Format](http-api.md#transaction-format) section for details about transaction structure and contents, with examples.
 
+{% api-method method="get" host="https://arweave.net" path="/tx/{id}/status" %}
+{% api-method-summary %}
+Get Transaction Status
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Get's the status of a transaction 
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="id" type="string" required=true %}
+Transaction ID
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Accept" type="string" required=false %}
+application/json
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+The transaction as a JSON Object 
+{% endapi-method-response-example-description %}
+
+```http
+{
+  "block_height": 641606,
+  "block_indep_hash": "akLaom7XAKYvIW7HPCtCqSCgYTGAa0zjer6FXvF8lX0pAPzcHMZj4XnQq0jaedT6",
+  "number_of_confirmations": 12
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+A transaction with the given ID cannot be found 
+{% endapi-method-response-example-description %}
+
+```
+{
+  "status": 404,
+  "error": "Not Found"
+}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
 {% api-method method="get" host="https://arweave.net" path="/tx/{id}/{field}" %}
 {% api-method-summary %}
 Get Transaction Field
