@@ -807,7 +807,7 @@ Invalid address.
 
 Endpoints for getting blocks and block data.
 
-{% api-method method="get" host="https://arweave.net" path="block/hash/{block\_hash}" %}
+{% api-method method="get" host="https://arweave.net/" path="block/hash/{block\_hash}" %}
 {% api-method-summary %}
 Get Block by ID
 {% endapi-method-summary %}
