@@ -78,6 +78,8 @@ arkb balance
 pEbU_SLfRzEseum0_hMB1Ie-hqvpeHWypRhZiPoioDI has a balance of 10.113659492352 AR
 ```
 
+## FAQs
+
 **Why do I need a keyfile?**
 
 Arweave is a blockchain-like network, so each data upload \(transaction\) needs signing with a valid Arweave keyfile.
