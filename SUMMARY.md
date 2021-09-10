@@ -10,7 +10,7 @@
 
 ## Arkb - Arweave Upload Tool <a id="tools"></a>
 
-* [Arkb Deploy](tools/textury-arkb/README.md)
+* [Arkb User Guide](tools/textury-arkb/README.md)
 
 
 ## Libraries/SDKs
