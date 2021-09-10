@@ -17,24 +17,7 @@ Install the latest version:
 npm install -g arkb
 ```
 
-## Installation Issues / Troubleshooting
-
-### Arkb requires NodeJS v15+
-
-Ensure your system/nvm version of NodeJS is updated to version 15 or later.
-
-### Make sure you do not have any older versions of arkb installed 
-
-Run the following commands as admin/root
-```bash
-npm uninstall -g @textury/arkb
-npm uninstall -g arkb
-```
-
-Then install a fresh copy of the latest version
-```bash
-npm install -g arkb@latest
-```
+For installation issues, see [troubleshooting](#troubleshoot) below
 
 
 ## Quick Start
@@ -107,5 +90,24 @@ If you don't have any Arweave tokens [you can get some free to try this out](htt
 
 You can use the same keyfiles as the Arweave [Chrome Extension Wallet](https://chrome.google.com/webstore/detail/arweave/iplppiggblloelhoglpmkmbinggcaaoc?hl=en-GB), go to Wallets &gt; Select a wallet &gt; Select 'Export Key' to download the json keyfile.
 
-
 You need to transfer funds to your new wallet address before you can use the keyfile for deployments. You can use the [Chrome Extension Wallet](https://chrome.google.com/webstore/detail/arweave/iplppiggblloelhoglpmkmbinggcaaoc?hl=en-GB) for transacting AR between wallets.
+
+
+## <a href="troubleshoot"></a>Installation Issues / Troubleshooting
+
+### Arkb requires NodeJS v15+
+
+Ensure your system/nvm version of NodeJS is updated to version 15 or later.
+
+### Make sure you do not have any older versions of arkb installed 
+
+Run the following commands as admin/root
+```bash
+npm uninstall -g @textury/arkb
+npm uninstall -g arkb
+```
+
+Then install a fresh copy of the latest version
+```bash
+npm install -g arkb@latest
+```
