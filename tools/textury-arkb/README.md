@@ -7,7 +7,7 @@ description: >-
 # Arkb User Guide
 
 {% hint style="warning" %}
-**For any questions and support queries regarding arkb, we strongly recommend that you join our** [<ins>**Discord server**</ins>](https://discord.gg/DjAFMJc) **as this is the hub of our developer community. Here you will find plenty of community devs and Arweave team members available to help you out** 🤖
+For any questions and support queries regarding Arkb, we strongly recommend that you join our [<ins>***Discord server***</ins>](https://discord.gg/DjAFMJc) as this is the hub of our developer community. Here you will find plenty of community devs and Arweave team members available to help you out 🤖
 {% endhint %}
 
 ## Installation
@@ -17,19 +17,19 @@ Install the latest version:
 npm install -g arkb
 ```
 
-For installation issues, see [<ins>troubleshooting</ins>](#installation-issues-troubleshooting) below
+For installation issues, see [<ins>***troubleshooting***</ins>](#installation-issues-troubleshooting) below
 
 
 ## Quick Start
 
 
-Deploy a folder (small numbers of files only)
+### Deploy a folder (small numbers of files only)
 
 ```bash
 arkb deploy ./folder --wallet path/to/my/wallet.json
 ```
 
-Save your keyfile
+### Save your keyfile
 
 ```text
 arkb wallet-save path/to/arweave-wallet-key.json
@@ -41,14 +41,14 @@ After saving your key you can now run commands without the `--wallet-file` optio
 arkb deploy ./folder
 ```
 
-Using Bundles
+### Using Bundles
 
-> **Note:** If you are planning to upload large batches of data transactions to the Arweave network, it is ***strongly*** advised that you use the `--use-bundler` option instead of regular deploy to avoid transaction failures. You can read about bundles and their advantages on the [<ins>Arwiki</ins>](https://arwiki.wiki/#/en/preview/WUAtjfiDQEIqhsUcHXIFTn5ZmeDIE7If9hJREBLRgak).
+> **Note:** If you are planning to upload large batches of data transactions to the Arweave network, it is ***strongly*** advised that you use the `--use-bundler` option instead of regular deploy to avoid transaction failures. You can read about bundles and their advantages on the [<ins>***Arwiki***</ins>](https://arwiki.wiki/#/en/preview/WUAtjfiDQEIqhsUcHXIFTn5ZmeDIE7If9hJREBLRgak).
 
 ```bash
 arkb deploy --use-bundler http://bundler.arweave.net:10000  ./folder
 ```
-> For up-to-date usage please always check the [<ins>Arkb README</ins>](https://github.com/textury/arkb#readme)
+> For up-to-date usage please always check the [<ins>***Arkb README***</ins>](https://github.com/textury/arkb#readme)
 
 ## Other Commands
 
@@ -86,7 +86,7 @@ Arweave is a blockchain-like network, so each data upload \(transaction\) needs 
 
 **I don't have an Arweave keyfile or tokens?**
 
-If you don't have any Arweave tokens [<ins>you can get some free to try this out</ins>](https://faucet.arweave.net).
+If you don't have any Arweave tokens [<ins>***you can get some free to try this out***</ins>](https://faucet.arweave.net).
 
 **I already have an Arweave wallet, how do I get the keyfile?**
 
