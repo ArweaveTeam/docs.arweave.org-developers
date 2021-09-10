@@ -70,11 +70,8 @@ Confirmed: true | Status: 200
 
 ### Check your wallet balance
 
-```text
-arkb balance
-```
-
-```text
+```bash
+# arkb balance
 pEbU_SLfRzEseum0_hMB1Ie-hqvpeHWypRhZiPoioDI has a balance of 10.113659492352 AR
 ```
 
