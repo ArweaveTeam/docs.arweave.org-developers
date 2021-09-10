@@ -13,7 +13,7 @@
 * [Arweave Deploy User Guide](tools/arweave-deploy/README.md)
   * [HTML Packaging](tools/arweave-deploy/html-packaging.md)
 * [License](tools/license.md)
-* [arkb Deployment Tool](tools/textury-arkb/README.md)
+* [Arkb Deployment Tool](tools/textury-arkb/README.md)
 
 
 ## Libraries/SDKs
