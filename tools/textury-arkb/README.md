@@ -17,7 +17,7 @@ Install the latest version:
 npm install -g arkb
 ```
 
-For installation issues, see [troubleshooting](#troubleshoot) below
+For installation issues, see [troubleshooting](#installation-issues-troubleshooting) below
 
 
 ## Quick Start
