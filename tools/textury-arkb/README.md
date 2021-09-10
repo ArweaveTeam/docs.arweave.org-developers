@@ -12,26 +12,35 @@ description: >-
 
 ## Installation
 
+Install the latest version:
+```bash
+npm install -g arkb
+```
 
-Ensure you do not have any older version of arkb installed or you may have issues. Run the following commands as admin/root
+## Installation Issues / Troubleshooting
 
+### Arkb requires NodeJS v15+
+
+Ensure your system/nvm version of NodeJS is updated to version 15 or later.
+
+### Make sure you do not have any older versions of arkb installed 
+
+Run the following commands as admin/root
 ```bash
 npm uninstall -g @textury/arkb
 npm uninstall -g arkb
 ```
 
-Then install the latest version:
+Then install a fresh copy of the latest version
 ```bash
-npm install -g arkb
+npm install -g arkb@latest
 ```
-
-arkb requires NodeJS v15+ so update your system / nvm accordingly.
 
 
 ## Quick Start
 
 
-Deploy a folder
+Deploy a folder (small numbers of files only)
 
 ```bash
 arkb deploy ./folder --wallet path/to/my/wallet.json
@@ -53,14 +62,12 @@ Using Bundles
 
 > **Note:** If you are planning to upload large batches of data transactions to the Arweave network, it is ***strongly*** advised that you use the `--use-bundler` option instead of regular deploy to avoid transaction failures. You can read about bundles and their advantages on the [Arwiki](https://arwiki.wiki/#/en/preview/WUAtjfiDQEIqhsUcHXIFTn5ZmeDIE7If9hJREBLRgak).
 
-## Usage
-
-> For up-to-date usage please always check the [arkb README](https://github.com/textury/arkb#readme)
-
 ```bash
 arkb deploy --use-bundler http://bundler.arweave.net:10000  ./folder
 ```
+> For up-to-date usage please always check the [arkb README](https://github.com/textury/arkb#readme)
 
+## Other Commands
 
 ### Check a deployment status
 
@@ -72,7 +79,7 @@ Example output
 # arkb status ERWTghgB8wDkOdKJ-8F1ne6BPIybv_rMLQPGP8c3YuE
 Confirmed: true | Status: 200
 ```
-Issue: if your txid begins with a `-` minus symbol you will need to enclose in quotes and escape the `-` character, like the following
+Note: If your txid begins with a `-` minus symbol you will need to enclose in quotes and escape the `-` character, like the following
 ```bash
 # arkb status "\-hvARuCZcnPxcdiqhuSx_qwVKDTsBv3aq6Inz5NiheQ"
 Confirmed: true | Status: 200
