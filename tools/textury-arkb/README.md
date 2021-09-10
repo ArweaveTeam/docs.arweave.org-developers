@@ -23,7 +23,7 @@ For installation issues, see [<ins>***troubleshooting***</ins>](#installation-is
 ## Quick Start
 
 
-### Deploy a folder (small numbers of files only)
+### Deploy a folder (not for large batches of files)
 
 ```bash
 arkb deploy ./folder --wallet path/to/my/wallet.json
@@ -46,7 +46,7 @@ arkb deploy ./folder
 > **Note:** If you are planning to upload large batches of data transactions to the Arweave network, it is ***strongly*** advised that you use the `--use-bundler` option instead of regular deploy to avoid transaction failures. You can read about bundles and their advantages on the [<ins>***Arwiki***</ins>](https://arwiki.wiki/#/en/preview/WUAtjfiDQEIqhsUcHXIFTn5ZmeDIE7If9hJREBLRgak).
 
 ```bash
-arkb deploy --use-bundler http://bundler.arweave.net:10000  ./folder
+arkb deploy ./folder --use-bundler http://bundler.arweave.net:10000
 ```
 > For up-to-date usage please always check the [<ins>***Arkb README***</ins>](https://github.com/textury/arkb#readme)
 
