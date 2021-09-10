@@ -8,12 +8,9 @@
 
 * [HTTP API](server/http-api.md)
 
-## Arweave Deploy <a id="tools"></a>
+## Arkb - Arweave Upload Tool <a id="tools"></a>
 
-* [Arweave Deploy User Guide](tools/arweave-deploy/README.md)
-  * [HTML Packaging](tools/arweave-deploy/html-packaging.md)
-* [License](tools/license.md)
-* [Arkb Deployment Tool](tools/textury-arkb/README.md)
+* [Arkb Deploy](tools/textury-arkb/README.md)
 
 
 ## Libraries/SDKs
