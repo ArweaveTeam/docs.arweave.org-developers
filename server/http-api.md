@@ -501,13 +501,19 @@ Not Found.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://arweave.net" path="/tx/{id}/data.{extension}" %}
+{% api-method method="get" host="http://arweave.net:1984" path="/{id}" %}
 {% api-method-summary %}
 Get Transaction Data
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get the raw Base64 decoded data from a transaction.The `Content-Type` will default to `text/html` so this endpoint will return a browser renderable response by default.
+Get the raw base64 decoded data from a transaction.  
+  
+The `Content-Type` will default to the one specified in the `Content-Type` tag.
+
+You can also get the data with a different `Content-Type` response, by doing:
+{% api-method method="get" host="http://arweave.net:1984" path="/tx/{id}/data.{extension}" %}
+*Note: It is always best to use the `/{id}` endpoint. As it can server the data no matter their size. `/tx/{id}/cata.{extension}` is limited in size and doesn't return the data for pending transactions.*
 {% endapi-method-description %}
 
 {% api-method-spec %}
