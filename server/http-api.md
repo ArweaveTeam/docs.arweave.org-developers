@@ -502,9 +502,7 @@ Not Found.
 {% endapi-method %}
 
 {% api-method method="get" host="http://arweave.net" path="/{id}" %}
-{% api-method-summary %}
-Get Transaction Data From Gateway
-{% endapi-method-summary %}
+
 
 {% api-method-description %}
 Get the decoded data from a transaction.  
