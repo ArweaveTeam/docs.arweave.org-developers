@@ -16,7 +16,7 @@
 ## Libraries/SDKs
 
 * [JavsScript/TypeScript/NodeJS](https://github.com/ArweaveTeam/arweave-js)
-* [Go](https://github.com/Dev43/arweave-go)
+* [Go](https://github.com/everFinance/goar)
 * [PHP](https://github.com/ArweaveTeam/arweave-php)
 * [Scala](https://github.com/toknapp/arweave4s)
 
