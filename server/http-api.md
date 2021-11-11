@@ -768,7 +768,7 @@ Invalid address.
 Wallet balances are always represented as winston strings. [**What and why?**](http-api.md#winston-and-ar)\*\*\*\*
 {% endhint %}
 
-{% api-method method="get" host="https://arweave.net" path="/wallet/{address}/last\_tx" %}
+{% api-method method="get" host="https://arweave.net" path="/wallet/{address}/last_tx" %}
 {% api-method-summary %}
 Get Last Transaction ID
 {% endapi-method-summary %}
