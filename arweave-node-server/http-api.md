@@ -26,11 +26,12 @@ curl --request GET \
 
 {% tab title="JavaScript \(Fetch\)" %}
 ```javascript
-fetch('http://arweave.net:1984/info')
-.then( response => {
-  console.log('Arweave network height is: ' + response.json().height);
+fetch('https://arweave.net/info')
+.then(response => response.json())
+.then(data => {
+  console.log('Arweave network height is: ' + data.height);
 })
-.catch( error => {
+.catch(error => {
   console.error(error);
 });
 ```
