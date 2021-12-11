@@ -374,6 +374,61 @@ The **quantity** and **reward** values are always represented as winston strings
 
 See the [Transaction Format](http-api.md#transaction-format) section for details about transaction structure and contents, with examples.
 
+{% api-method method="get" host="https://arweave.net" path="/tx/{id}/status" %}
+{% api-method-summary %}
+Get Transaction Status
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Get's the status of a transaction 
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="id" type="string" required=true %}
+Transaction ID
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+
+{% api-method-headers %}
+{% api-method-parameter name="Accept" type="string" required=false %}
+application/json
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+The transaction as a JSON Object 
+{% endapi-method-response-example-description %}
+
+```http
+{
+  "block_height": 641606,
+  "block_indep_hash": "akLaom7XAKYvIW7HPCtCqSCgYTGAa0zjer6FXvF8lX0pAPzcHMZj4XnQq0jaedT6",
+  "number_of_confirmations": 12
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=404 %}
+{% api-method-response-example-description %}
+A transaction with the given ID cannot be found 
+{% endapi-method-response-example-description %}
+
+```
+{
+  "status": 404,
+  "error": "Not Found"
+}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
 {% api-method method="get" host="https://arweave.net" path="/tx/{id}/{field}" %}
 {% api-method-summary %}
 Get Transaction Field
@@ -446,13 +501,20 @@ Not Found.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="https://arweave.net" path="/tx/{id}/data.{extension}" %}
-{% api-method-summary %}
-Get Transaction Data
-{% endapi-method-summary %}
+{% api-method method="get" host="http://arweave.net" path="/{id}" %}
+
 
 {% api-method-description %}
-Get the raw Base64 decoded data from a transaction.The `Content-Type` will default to `text/html` so this endpoint will return a browser renderable response by default.
+Get the decoded data from a transaction.  
+  
+The `Content-Type` will default to the one specified in the `Content-Type` tag.
+
+You can also get the data with a different `Content-Type` response, by doing:
+
+
+{% api-method method="get" host="http://arweave.net:1984" path="/tx/{id}/data.{extension}" %}
+
+*Note: It is always best to use the `/{id}` endpoint. As it can server the data no matter their size. `/tx/{id}/cata.{extension}` is limited in size and doesn't return the data for pending transactions.*
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -706,7 +768,7 @@ Invalid address.
 Wallet balances are always represented as winston strings. [**What and why?**](http-api.md#winston-and-ar)\*\*\*\*
 {% endhint %}
 
-{% api-method method="get" host="https://arweave.net" path="/wallet/{address}/last\_tx" %}
+{% api-method method="get" host="https://arweave.net" path="/wallet/{address}/last_tx" %}
 {% api-method-summary %}
 Get Last Transaction ID
 {% endapi-method-summary %}
@@ -752,7 +814,7 @@ Invalid address.
 
 Endpoints for getting blocks and block data.
 
-{% api-method method="get" host="https://arweave.net" path="block/hash/{block\_hash}" %}
+{% api-method method="get" host="https://arweave.net" path="/block/hash/{block\_hash}" %}
 {% api-method-summary %}
 Get Block by ID
 {% endapi-method-summary %}
@@ -907,4 +969,245 @@ application/json
 {% endapi-method-response %}
 {% endapi-method-spec %}
 {% endapi-method %}
+
+## Chunks
+
+### Upload Chunks
+
+{% api-method method="post" host="https://arweave.net" path="/chunk" %}
+{% api-method-summary %}
+Upload Data Chunks
+{% endapi-method-summary %}
+
+{% api-method-description %}
+
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+200
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+Different types of 400 responses  
+{% endapi-method-response-example-description %}
+
+```
+// When chunk is bigger than 256 KiB.
+{"error": "chunk_too_big"}
+
+or
+
+// When the proof is bigger than 256 KiB.
+{"error": "data_path_too_big"}
+
+or
+
+// When the offset is bigger than 2 ^ 256.
+{"error": "offset_too_big"}
+
+or
+
+// When the data size is bigger than 2 ^ 256.
+{"error": "data_size_too_big"}
+
+or
+
+/*
+  When data_path is bigger than the chunk.
+  NOTE: If the original data is too small, it should not be uploaded in chunks. 
+  Also, this does not apply to chunks which are the only chunks of their transaction
+  and to the last chunk of every transaction.
+*/
+
+{"error": "chunk_proof_ratio_not_attractive"}
+
+or
+
+// When the node hasn’t seen the header of the corresponding transaction yet.
+{"error": "data_root_not_found"}
+
+or
+
+/*
+  The corresponding transaction is pending and it is either of:
+   - 50 MiB worth of chunks have been already accepted by this node for this (data root, data size);
+   - 2 GiB worth of all pending chunks have been accepted by this node. 
+   
+  Note: The values above are default values, any node may configure bigger limits.  
+
+*/
+{"error": "exceeds_disk_pool_size_limit"}
+
+or
+
+{"error": "invalid_proof"}
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=503 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+// When the node has not joined the network yet.
+{"error": "not_joined"}
+
+or
+
+{"error": "timeout"}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+```javascript
+{
+  "data_root": "<Base64URL encoded data merkle root>",
+  "data_size": "a number, the size of transaction in bytes",
+  "data_path": "<Base64URL encoded inclusion proof>",
+  "chunk": "<Base64URL encoded data chunk>",
+  "offset": "<a number from [start_offset, start_offset + chunk size), relative to other chunks>"
+}
+```
+
+{% hint style="info" %}
+**NOTE:**  **data\_size is requested in addition to data root, because one may submit the same data root with different transaction sizes. To avoid chunks overlap, data root always comes together with the size.**
+{% endhint %}
+
+### Download Chunks
+
+{% api-method method="get" host="https://arweave.net" path="/tx/{id}/data" %}
+{% api-method-summary %}
+Get Transaction Data
+{% endapi-method-summary %}
+
+{% api-method-description %}
+The endpoint serves data regardless of how it was uploaded
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="ID" type="string" required=true %}
+Transaction ID 
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+<Base64URL encoded data>
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+When data is bigger than 12MiB   
+  
+**NOTE:** Data bigger than that has to be downloaded chunk by chunk.
+{% endapi-method-response-example-description %}
+
+```
+tx_data_too_big
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=503 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+// When the node has not joined the network yet.
+{"error": "not_joined"}
+
+or 
+
+{"error": "timeout"}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="get" host="https://arweave.net" path=" /tx/{id}/offset" %}
+{% api-method-summary %}
+Get Transaction Offset and Size
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Get the absolute end offset and size of the transaction   
+  
+**NOTE:** The client may use this information to collect transaction chunks. Start with the end offset and fetch a chunk via `GET /chunk/<offset>`. Subtract its size from the transaction size - if there are more chunks to fetch, subtract the size of the chunk from the offset and fetch the next chunk.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="ID" type="string" required=true %}
+Transaction ID
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{"offset": "...", "size": "..."}
+
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+{"error": "invalid_address"}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=503 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```
+// When the node has not joined the network yet.
+{"error": "not_joined"}
+
+or 
+
+{"error": "timeout"}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+
 

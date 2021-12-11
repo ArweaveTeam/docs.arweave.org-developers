@@ -8,16 +8,16 @@
 
 * [HTTP API](server/http-api.md)
 
-## Arweave Deploy <a id="tools"></a>
+## Arkb - Arweave Upload Tool <a id="tools"></a>
 
-* [Arweave Deploy User Guide](tools/arweave-deploy/README.md)
-  * [HTML Packaging](tools/arweave-deploy/html-packaging.md)
-* [License](tools/license.md)
+* [Arkb User Guide](tools/textury-arkb/README.md)
+
 
 ## Libraries/SDKs
 
-* [Go](https://github.com/Dev43/arweave-go)
+* [JavaScript/TypeScript/NodeJS](https://github.com/ArweaveTeam/arweave-js)
+* [Go](https://github.com/everFinance/goar)
 * [PHP](https://github.com/ArweaveTeam/arweave-php)
 * [Scala](https://github.com/toknapp/arweave4s)
-* [JavaScript/TypeScript/NodeJS](https://github.com/ArweaveTeam/arweave-js)
+
 

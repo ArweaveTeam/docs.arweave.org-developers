@@ -5,7 +5,7 @@ The Arweave network itself is a global, permanent hard drive, while the permaweb
 Permaweb apps are built using normal web technologies — HTML, CSS, and Javascript — but are deployed to Arweave’s on-chain storage system, making them permanent and available in a fast, decentralised manner. You can deploy a permaweb app in 2 minutes or less with Arweave Deploy!  
 
 
-\*\*\*\*[**Get a free wallet with 1 AR to try it out**](http://tokens.arweave.org)**.**
+\*\*\*\*[**Get a free wallet with some AR to try it out**](http://tokens.arweave.org)**.**
 
 ## **Introduction & background:**
 
