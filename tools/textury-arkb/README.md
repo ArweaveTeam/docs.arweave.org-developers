@@ -46,9 +46,12 @@ arkb deploy ./folder
 > **Note:** If you are planning to upload large batches of data transactions to the Arweave network, it is ***strongly*** advised that you use the `--use-bundler` option instead of regular deploy to avoid transaction failures. You can read about bundles and their advantages on the [<ins>***Arwiki***</ins>](https://arwiki.wiki/#/en/preview/WUAtjfiDQEIqhsUcHXIFTn5ZmeDIE7If9hJREBLRgak).
 
 ```bash
-arkb deploy ./folder --use-bundler http://bundler.arweave.net:10000
+arkb deploy ./folder --use-bundler URL_OF_BUNDLR_NODE
 ```
-> For up-to-date usage please always check the [<ins>***Arkb README***</ins>](https://github.com/textury/arkb#readme)
+
+> The current list of Bundlr nodes can be found here [<ins>***https://docs.bundlr.network/docs/bundlers***</ins>](https://docs.bundlr.network/docs/bundlers)
+
+> For up-to-date usage please always check the [<ins>***Arkb README***</ins>](https://github.com/textury/arkb#readme) and [<ins>***Bundlr.network docs***</ins>](https://docs.bundlr.network)
 
 ## Other Commands
 
