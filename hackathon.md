@@ -17,7 +17,7 @@ Permaweb apps are built using normal web technologies — HTML, CSS, and Javascr
 
 * \*\*\*\*[**Developer documentation**](%20https://docs.arweave.org/developers/) ****
 * [**HTTP API docs** ](https://docs.arweave.org/developers/server/http-api)
-* [**Arweave Deploy**](https://github.com/ArweaveTeam/arweave-deploy)\*\*\*\*
+* [**Arkb Deploy**](https://github.com/textury/arkb)\*\*\*\*
 * \*\*\*\*[**Arweave JS**](https://github.com/ArweaveTeam/arweave-js)\*\*\*\*
 * \*\*\*\*[**Existing permaweb apps**](http://arweaveapps.com)
 * [**Block explorer**](http://viewblock.io/arweave)\*\*\*\*
